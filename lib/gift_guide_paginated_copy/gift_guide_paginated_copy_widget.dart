@@ -1472,6 +1472,16 @@ class _GiftGuidePaginatedCopyWidgetState
                                                                               150.0,
                                                                           fit: BoxFit
                                                                               .cover,
+                                                                          errorBuilder: (context, error, stackTrace) =>
+                                                                              Image.asset(
+                                                                            'assets/images/error_image.png',
+                                                                            width:
+                                                                                150.0,
+                                                                            height:
+                                                                                150.0,
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),
