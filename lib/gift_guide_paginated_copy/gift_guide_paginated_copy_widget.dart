@@ -632,7 +632,7 @@ class _GiftGuidePaginatedCopyWidgetState
                                           .bodyMedium,
                                     ),
                                   Text(
-                                    functions.queryBuilder(
+                                    functions.queryBuilderWithRange(
                                         FFAppState().conditions.toList()),
                                     style:
                                         FlutterFlowTheme.of(context).bodyMedium,

@@ -895,6 +895,44 @@ List<dynamic> sortListOfItems(
   return listOfItems;
 }
 
+String queryBuilderWithRange(List<String> conditions) {
+  if (conditions.isEmpty) {
+    return ''; // Return empty string if no conditions are provided
+  }
+
+  List<String> rangeConditions = [];
+  List<String> otherConditions = [];
+
+  for (var conditionString in conditions) {
+    var parts = conditionString.split(":");
+    if (parts.length == 3) {
+      var column = parts[0];
+      var value = parts[1];
+      var operator = parts[2];
+
+      if (value.contains('-')) {
+        var rangeValues = value.split('-');
+        if (rangeValues.length == 2) {
+          rangeConditions.add(
+              '${column}=gte.${rangeValues[0]}&${column}=lte.${rangeValues[1]}');
+        }
+      } else {
+        otherConditions.add('${column}=${operator}.${value}');
+      }
+    }
+  }
+
+  List<String> queryParts = [];
+  if (rangeConditions.isNotEmpty) {
+    queryParts.add(rangeConditions.join('&'));
+  }
+  if (otherConditions.isNotEmpty) {
+    queryParts.add(otherConditions.join('&'));
+  }
+
+  return queryParts.join('&');
+}
+
 String queryBuilder(List<String> conditions) {
 // generate a supabase rest api url query based on a list of conditions
   if (conditions.isEmpty) {
@@ -928,20 +966,5 @@ String queryBuilder(List<String> conditions) {
     }
   });
 
-  // groupedConditions.forEach((key, conditionGroup) {
-  //   // Fix syntax here, add parentheses for the forEach function
-  //   if (conditionGroup.length == 1) {
-  //     var parts = conditionGroup.first.split(':');
-  //     queryParts.add('${parts[0]}=eq.${parts[1]}');
-  //   } else {
-  //     List<String> orConditions = conditionGroup.map((condition) {
-  //       var parts = condition.split(':');
-  //       return '${parts[0]}=eq.${parts[1]}';
-  //     }).toList();
-
-  //     String orGroup = orConditions.join(',');
-  //     queryParts.add('or=(${orGroup})');
-  //   }
-  // });
   return queryParts.join('&');
 }
