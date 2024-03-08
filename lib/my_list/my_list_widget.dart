@@ -43,8 +43,6 @@ class _MyListWidgetState extends State<MyListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return FutureBuilder<List<GiftGuideRow>>(
       future: GiftGuideTable().queryRows(
         queryFn: (q) => q.in_(
@@ -205,9 +203,9 @@ class _MyListWidgetState extends State<MyListWidget> {
                                                 size: 20.0,
                                               ),
                                               RichText(
-                                                textScaleFactor:
+                                                textScaler:
                                                     MediaQuery.of(context)
-                                                        .textScaleFactor,
+                                                        .textScaler,
                                                 text: TextSpan(
                                                   children: [
                                                     TextSpan(

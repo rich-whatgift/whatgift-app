@@ -38,8 +38,6 @@ class _HeaderLoggedInWidgetState extends State<HeaderLoggedInWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       width: MediaQuery.sizeOf(context).width * 1.0,
       height: 70.0,

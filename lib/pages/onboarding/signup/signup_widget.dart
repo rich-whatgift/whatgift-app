@@ -549,8 +549,8 @@ class _SignupWidgetState extends State<SignupWidget>
                                         ),
                                       ),
                                       RichText(
-                                        textScaleFactor: MediaQuery.of(context)
-                                            .textScaleFactor,
+                                        textScaler:
+                                            MediaQuery.of(context).textScaler,
                                         text: TextSpan(
                                           children: [
                                             TextSpan(
@@ -887,8 +887,8 @@ class _SignupWidgetState extends State<SignupWidget>
                                         );
                                       },
                                       child: RichText(
-                                        textScaleFactor: MediaQuery.of(context)
-                                            .textScaleFactor,
+                                        textScaler:
+                                            MediaQuery.of(context).textScaler,
                                         text: TextSpan(
                                           children: [
                                             TextSpan(

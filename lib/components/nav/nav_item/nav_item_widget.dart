@@ -51,8 +51,6 @@ class _NavItemWidgetState extends State<NavItemWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Align(
       alignment: AlignmentDirectional(-1.0, 0.0),
       child: Container(

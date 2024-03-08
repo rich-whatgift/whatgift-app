@@ -301,9 +301,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                             size: 24.0,
                                           ),
                                           RichText(
-                                            textScaleFactor:
-                                                MediaQuery.of(context)
-                                                    .textScaleFactor,
+                                            textScaler: MediaQuery.of(context)
+                                                .textScaler,
                                             text: TextSpan(
                                               children: [
                                                 TextSpan(
@@ -455,10 +454,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                                                   ),
                                                             ),
                                                             RichText(
-                                                              textScaleFactor:
+                                                              textScaler:
                                                                   MediaQuery.of(
                                                                           context)
-                                                                      .textScaleFactor,
+                                                                      .textScaler,
                                                               text: TextSpan(
                                                                 children: [
                                                                   TextSpan(
@@ -591,10 +590,10 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                                                   ),
                                                             ),
                                                             RichText(
-                                                              textScaleFactor:
+                                                              textScaler:
                                                                   MediaQuery.of(
                                                                           context)
-                                                                      .textScaleFactor,
+                                                                      .textScaler,
                                                               text: TextSpan(
                                                                 children: [
                                                                   TextSpan(
@@ -930,9 +929,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             RichText(
-                                              textScaleFactor:
-                                                  MediaQuery.of(context)
-                                                      .textScaleFactor,
+                                              textScaler: MediaQuery.of(context)
+                                                  .textScaler,
                                               text: TextSpan(
                                                 children: [
                                                   TextSpan(
@@ -1011,9 +1009,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             RichText(
-                                              textScaleFactor:
-                                                  MediaQuery.of(context)
-                                                      .textScaleFactor,
+                                              textScaler: MediaQuery.of(context)
+                                                  .textScaler,
                                               text: TextSpan(
                                                 children: [
                                                   TextSpan(
@@ -1091,9 +1088,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             RichText(
-                                              textScaleFactor:
-                                                  MediaQuery.of(context)
-                                                      .textScaleFactor,
+                                              textScaler: MediaQuery.of(context)
+                                                  .textScaler,
                                               text: TextSpan(
                                                 children: [
                                                   TextSpan(
@@ -1172,9 +1168,8 @@ class _UserProfileWidgetState extends State<UserProfileWidget> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             RichText(
-                                              textScaleFactor:
-                                                  MediaQuery.of(context)
-                                                      .textScaleFactor,
+                                              textScaler: MediaQuery.of(context)
+                                                  .textScaler,
                                               text: TextSpan(
                                                 children: [
                                                   TextSpan(

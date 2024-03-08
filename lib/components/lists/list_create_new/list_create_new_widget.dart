@@ -45,8 +45,6 @@ class _ListCreateNewWidgetState extends State<ListCreateNewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Container(

@@ -42,8 +42,6 @@ class _ProfilePhotoUploadWidgetState extends State<ProfilePhotoUploadWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       decoration: BoxDecoration(),
       child: Padding(

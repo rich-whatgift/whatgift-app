@@ -55,8 +55,6 @@ class _MyListFinalWidgetState extends State<MyListFinalWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -187,9 +185,8 @@ class _MyListFinalWidgetState extends State<MyListFinalWidget> {
                                             size: 20.0,
                                           ),
                                           RichText(
-                                            textScaleFactor:
-                                                MediaQuery.of(context)
-                                                    .textScaleFactor,
+                                            textScaler: MediaQuery.of(context)
+                                                .textScaler,
                                             text: TextSpan(
                                               children: [
                                                 TextSpan(

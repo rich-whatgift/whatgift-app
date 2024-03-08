@@ -40,8 +40,6 @@ class _BottomNavigationComponentWidgetState
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Stack(
       alignment: AlignmentDirectional(0.0, 0.0),
       children: [

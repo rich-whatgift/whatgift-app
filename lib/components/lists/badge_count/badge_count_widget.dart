@@ -46,8 +46,6 @@ class _BadgeCountWidgetState extends State<BadgeCountWidget> {
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return Container(
       height: 30.0,
       decoration: BoxDecoration(
