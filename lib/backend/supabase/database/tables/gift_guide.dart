@@ -43,4 +43,11 @@ class GiftGuideRow extends SupabaseDataRow {
 
   String? get currency => getField<String>('currency');
   set currency(String? value) => setField<String>('currency', value);
+
+  String? get createdBy => getField<String>('created_by');
+  set createdBy(String? value) => setField<String>('created_by', value);
+
+  String? get highlightLabel => getField<String>('highlight_label');
+  set highlightLabel(String? value) =>
+      setField<String>('highlight_label', value);
 }

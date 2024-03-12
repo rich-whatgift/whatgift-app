@@ -22,12 +22,25 @@ class FFAppState extends ChangeNotifier {
     _instance = FFAppState._internal();
   }
 
-  Future initializePersistedState() async {}
+  Future initializePersistedState() async {
+    prefs = await SharedPreferences.getInstance();
+    _safeInit(() {
+      if (prefs.containsKey('ff_UserInfo')) {
+        try {
+          _UserInfo = jsonDecode(prefs.getString('ff_UserInfo') ?? '');
+        } catch (e) {
+          print("Can't decode persisted json. Error: $e.");
+        }
+      }
+    });
+  }
 
   void update(VoidCallback callback) {
     callback();
     notifyListeners();
   }
+
+  late SharedPreferences prefs;
 
   bool _navSidebar = true;
   bool get navSidebar => _navSidebar;
@@ -256,6 +269,13 @@ class FFAppState extends ChangeNotifier {
     _conditions.insert(_index, _value);
   }
 
+  dynamic _UserInfo;
+  dynamic get UserInfo => _UserInfo;
+  set UserInfo(dynamic _value) {
+    _UserInfo = _value;
+    prefs.setString('ff_UserInfo', jsonEncode(_value));
+  }
+
   final _countriesQueryManager = FutureRequestManager<List<CountriesRecord>>();
   Future<List<CountriesRecord>> countriesQuery({
     String? uniqueQueryKey,
@@ -270,4 +290,16 @@ class FFAppState extends ChangeNotifier {
   void clearCountriesQueryCache() => _countriesQueryManager.clear();
   void clearCountriesQueryCacheKey(String? uniqueKey) =>
       _countriesQueryManager.clearRequest(uniqueKey);
+}
+
+void _safeInit(Function() initializeField) {
+  try {
+    initializeField();
+  } catch (_) {}
+}
+
+Future _safeInitAsync(Function() initializeField) async {
+  try {
+    await initializeField();
+  } catch (_) {}
 }

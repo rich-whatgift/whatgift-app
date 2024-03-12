@@ -840,35 +840,6 @@ String? getCountryDialCode(String? countryName) {
   return null;
 }
 
-List<GiftGuideRow>? getPaginatedGiftGuide() {
-  final SupabaseClient _client = SupabaseClient(
-      'https://aemwcklkqbmkkgupkmoo.supabase.co',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlbXdja2xrcWJta2tndXBrbW9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDczOTU3NjcsImV4cCI6MjAyMjk3MTc2N30.JV1I3DiLkjKQ0LVyI90V3lAKYMO7whqBAliilQTQtc4');
-  final int _pageSize = 5;
-  List<GiftGuideRow> data = [];
-
-  Future<void> fetchData(int currentPage) async {
-    var from = _client.from('gift_guide');
-    final response = await _client
-        .from('gift_guide')
-        .select()
-        .range((currentPage - 1) * _pageSize, currentPage * _pageSize - 1)
-        .then((queryBuilder) => queryBuilder.execute());
-
-    if (response.error != null) {
-      // Handle error
-      print('Error fetching data: ${response.error!.message}');
-      return;
-    }
-
-    data.addAll(response.data as List<GiftGuideRow>);
-  }
-
-  fetchData(1); // Fetch the first page of data
-
-  return data;
-}
-
 List<dynamic> sortListOfItems(
   String sortBy,
   List<dynamic> listOfItems,
@@ -905,20 +876,17 @@ String queryBuilderWithRange(List<String> conditions) {
 
   for (var conditionString in conditions) {
     var parts = conditionString.split(":");
-    if (parts.length == 3) {
-      var column = parts[0];
-      var value = parts[1];
-      var operator = parts[2];
+    print("Parts: $parts");
+    var column = parts[0];
+    var value = parts[1];
+    var operator = parts.length == 3 ? parts[2] : '';
 
-      if (value.contains('-')) {
-        var rangeValues = value.split('-');
-        if (rangeValues.length == 2) {
-          rangeConditions.add(
-              '${column}=gte.${rangeValues[0]}&${column}=lte.${rangeValues[1]}');
-        }
-      } else {
-        otherConditions.add('${column}=${operator}.${value}');
-      }
+    if (value.contains('-')) {
+      var rangeValues = value.split('-');
+      rangeConditions.add(
+          '${column}=gte.${rangeValues[0]}&${column}=lte.${rangeValues[1]}');
+    } else {
+      otherConditions.add('${column}=${operator}.${value}');
     }
   }
 

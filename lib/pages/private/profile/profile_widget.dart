@@ -1,9 +1,9 @@
-import '/components/lists/badge_count/badge_count_widget.dart';
-import '/components/nav/header_logo/header_logo_widget.dart';
-import '/components/nav/side_navigation_component/side_navigation_component_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/lists/badge_count/badge_count_widget.dart';
+import '/nav/header_logo/header_logo_widget.dart';
+import '/nav/side_navigation_component/side_navigation_component_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

@@ -25,14 +25,10 @@ export '/pages/onboarding/personalise/personalise_widget.dart'
     show PersonaliseWidget;
 export '/pages/private/user_profile/user_profile_widget.dart'
     show UserProfileWidget;
-export '/gift_guide/gift_guide_widget.dart' show GiftGuideWidget;
-export '/gift_detail/gift_detail_widget.dart' show GiftDetailWidget;
-export '/create_gift_test/create_gift_test_widget.dart'
-    show CreateGiftTestWidget;
-export '/gift_guide_paginated/gift_guide_paginated_widget.dart'
+export '/gift/gift_detail/gift_detail_widget.dart' show GiftDetailWidget;
+export '/gift/gift_guide_paginated/gift_guide_paginated_widget.dart'
     show GiftGuidePaginatedWidget;
-export '/my_list/my_list_widget.dart' show MyListWidget;
-export '/my_list_final/my_list_final_widget.dart' show MyListFinalWidget;
-export '/full_onboard/full_onboard_widget.dart' show FullOnboardWidget;
-export '/gift_guide_paginated_copy/gift_guide_paginated_copy_widget.dart'
-    show GiftGuidePaginatedCopyWidget;
+export '/lists/my_list/my_list_widget.dart' show MyListWidget;
+export '/lists/my_list_final/my_list_final_widget.dart' show MyListFinalWidget;
+export '/pages/onboarding/full_onboard/full_onboard_widget.dart'
+    show FullOnboardWidget;

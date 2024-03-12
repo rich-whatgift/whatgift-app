@@ -23,12 +23,8 @@ class SideNavigationComponentModel
   // State field(s) for Expandable widget.
   late ExpandableController expandableController;
 
-  // Stores action output result for [Custom Action - getAllGiftsByListID] action in Button widget.
-  List<dynamic>? allGiftsByListID;
   // Stores action output result for [Custom Action - fetchPaginatedItem] action in Row widget.
   List<dynamic>? fetchedInitialData2;
-  // Stores action output result for [Custom Action - fetchPaginatedItem] action in Text widget.
-  List<dynamic>? fetchedInitialData3;
 
   /// Initialization and disposal methods.
 

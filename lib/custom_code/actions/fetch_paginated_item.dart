@@ -14,23 +14,17 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:supabase/supabase.dart';
 
-// final client = SupabaseClient(
-//   'https://aemwcklkqbmkkgupkmoo.supabase.co',
-//   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlbXdja2xrcWJta2tndXBrbW9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDczOTU3NjcsImV4cCI6MjAyMjk3MTc2N30.JV1I3DiLkjKQ0LVyI90V3lAKYMO7whqBAliilQTQtc4',
-// );
-
 Future<List<dynamic>> fetchPaginatedItem(int pageNumber) async {
   final supabase = SupaFlow.client;
-  int pageSize = 3;
+  int pageSize = 5;
   final response = await supabase
       .from('gift_guide')
       .select('*')
       .order('title', ascending: true)
       .range(0, (pageNumber + 1) * pageSize - 1);
 
-  // Check for errors if necessary
-  // if (response.error != null) {
-  //   throw response.error!;
-  // }
-  return response;
+  List<dynamic> filteredData =
+      response.where((item) => item['created_by'] == null).toList();
+
+  return filteredData;
 }

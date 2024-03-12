@@ -1,6 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
-import '/components/nav/header_logo/header_logo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -87,6 +87,27 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+          automaticallyImplyLeading: false,
+          leading: FlutterFlowIconButton(
+            borderColor: Colors.transparent,
+            borderRadius: 30.0,
+            borderWidth: 1.0,
+            buttonSize: 60.0,
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: FlutterFlowTheme.of(context).primary,
+              size: 30.0,
+            ),
+            onPressed: () async {
+              context.pop();
+            },
+          ),
+          actions: [],
+          centerTitle: false,
+          elevation: 0.0,
+        ),
         body: Stack(
           children: [
             Container(
@@ -100,18 +121,6 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  wrapWithModel(
-                    model: _model.headerLogoModel,
-                    updateCallback: () => setState(() {}),
-                    child: HeaderLogoWidget(
-                      purpleTheme: true,
-                      whiteTheme: false,
-                      showSignIn: false,
-                      showMenuIcon: false,
-                      showCloseIcon: false,
-                      showBackIcon: true,
-                    ),
-                  ),
                   Expanded(
                     child: Padding(
                       padding:
@@ -244,6 +253,8 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium,
                                         maxLines: null,
+                                        keyboardType:
+                                            TextInputType.emailAddress,
                                         validator: _model
                                             .emailControllerValidator
                                             .asValidator(context),
@@ -299,6 +310,10 @@ class _ForgotPasswordWidgetState extends State<ForgotPasswordWidget>
                                   borderRadius: BorderRadius.circular(24.0),
                                 ),
                               ),
+                            ),
+                            Text(
+                              'Password reset link will be sent to the email above',
+                              style: FlutterFlowTheme.of(context).bodyMedium,
                             ),
                           ],
                         ),

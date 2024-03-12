@@ -3,7 +3,6 @@ import '/backend/supabase/supabase.dart';
 import '/components/add_gift_to_list_widget.dart';
 import '/components/empty_gift_guide_widget.dart';
 import '/components/filter_list_widget.dart';
-import '/components/nav/side_navigation_component/side_navigation_component_widget.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -11,6 +10,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/nav/side_navigation_component/side_navigation_component_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'gift_guide_paginated_widget.dart' show GiftGuidePaginatedWidget;
@@ -56,6 +56,8 @@ class GiftGuidePaginatedModel
       choiceChipResultList[index] = updateFn(choiceChipResultList[index]);
 
   bool isFilterOn = false;
+
+  String highlightLabel = 'Expert Review';
 
   ///  State fields for stateful widgets in this page.
 

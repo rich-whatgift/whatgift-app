@@ -168,19 +168,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => UserProfileWidget(),
         ),
         FFRoute(
-          name: 'GiftGuide',
-          path: '/giftGuide',
-          builder: (context, params) => GiftGuideWidget(),
-        ),
-        FFRoute(
           name: 'GiftDetail',
           path: '/giftDetail',
-          builder: (context, params) => GiftDetailWidget(),
-        ),
-        FFRoute(
-          name: 'CreateGiftTest',
-          path: '/createGiftTest',
-          builder: (context, params) => CreateGiftTestWidget(),
+          builder: (context, params) => GiftDetailWidget(
+            giftItem: params.getParam('giftItem', ParamType.JSON),
+          ),
         ),
         FFRoute(
           name: 'GiftGuidePaginated',
@@ -199,19 +191,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/myListFinal',
           builder: (context, params) => MyListFinalWidget(
             listRow: params.getParam('listRow', ParamType.JSON),
-            giftList:
-                params.getParam<dynamic>('giftList', ParamType.JSON, true),
           ),
         ),
         FFRoute(
           name: 'FullOnboard',
           path: '/fullOnboard',
           builder: (context, params) => FullOnboardWidget(),
-        ),
-        FFRoute(
-          name: 'GiftGuidePaginatedCopy',
-          path: '/giftGuidePaginatedCopy',
-          builder: (context, params) => GiftGuidePaginatedCopyWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

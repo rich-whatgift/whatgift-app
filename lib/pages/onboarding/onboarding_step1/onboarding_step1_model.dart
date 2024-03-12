@@ -1,8 +1,8 @@
-import '/components/nav/header_logo/header_logo_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/nav/header_logo/header_logo_widget.dart';
 import 'onboarding_step1_widget.dart' show OnboardingStep1Widget;
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';

@@ -406,23 +406,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        if (_model
-                                            .emailTextController.text.isEmpty) {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'Email required!',
-                                              ),
-                                            ),
-                                          );
-                                          return;
-                                        }
-                                        await authManager.resetPassword(
-                                          email:
-                                              _model.emailTextController.text,
-                                          context: context,
-                                        );
+                                        context.pushNamed('forgotPassword');
                                       },
                                       child: Text(
                                         'Forgot password?',
@@ -455,9 +439,6 @@ class _SignInWidgetState extends State<SignInWidget>
                                           return;
                                         }
 
-                                        setState(() {
-                                          FFAppState().AllMyLists = [];
-                                        });
                                         _model.getUserInfo =
                                             await UserTable().queryRows(
                                           queryFn: (q) => q.eq(
@@ -465,6 +446,9 @@ class _SignInWidgetState extends State<SignInWidget>
                                             currentUserUid,
                                           ),
                                         );
+                                        setState(() {
+                                          FFAppState().AllMyLists = [];
+                                        });
                                         if (_model.getUserInfo?.first
                                                 ?.isProfileCreated ==
                                             false) {

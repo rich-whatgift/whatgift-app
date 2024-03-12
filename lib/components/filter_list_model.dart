@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'filter_list_widget.dart' show FilterListWidget;
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +49,7 @@ class FilterListModel extends FlutterFlowModel<FilterListWidget> {
   bool? checkboxListTileValue9;
   // State field(s) for CheckboxListTile widget.
   bool? checkboxListTileValue10;
-  // Stores action output result for [Backend Call - API (SelectGiftGuideItems)] action in Button widget.
+  // Stores action output result for [Backend Call - API (SelectFilteredGiftGuideItems)] action in Button widget.
   ApiCallResponse? filteredGiftGuide;
 
   /// Initialization and disposal methods.

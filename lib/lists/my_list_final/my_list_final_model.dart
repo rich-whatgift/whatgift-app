@@ -1,6 +1,7 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/empty_gift_list_widget.dart';
+import '/components/manual_gift_creation_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -26,15 +27,21 @@ class MyListFinalModel extends FlutterFlowModel<MyListFinalWidget> {
   void updateAllGiftItemListAtIndex(int index, Function(dynamic) updateFn) =>
       allGiftItemList[index] = updateFn(allGiftItemList[index]);
 
+  bool isLoadingCompleted = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Custom Action - getAllGiftsByListID] action in MyListFinal widget.
+  List<dynamic>? myAllGifts;
   // Stores action output result for [Backend Call - Delete Row(s)] action in Icon widget.
   List<ListGiftGuideRow>? rowDeleted;
   // Stores action output result for [Custom Action - getAllGiftsByListID] action in Icon widget.
   List<dynamic>? allGiftsByListID;
   // Model for EmptyGiftList component.
   late EmptyGiftListModel emptyGiftListModel;
+  // Stores action output result for [Custom Action - fetchPaginatedItem] action in Button widget.
+  List<dynamic>? fetchedInitialData3;
 
   /// Initialization and disposal methods.
 

@@ -1,10 +1,10 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
-import '/components/nav/side_navigation_component/side_navigation_component_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/nav/side_navigation_component/side_navigation_component_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'user_profile_widget.dart' show UserProfileWidget;
 import 'package:flutter/gestures.dart';

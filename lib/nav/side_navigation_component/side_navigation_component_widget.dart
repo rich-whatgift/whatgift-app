@@ -283,15 +283,6 @@ class _SideNavigationComponentWidgetState
                                                   ),
                                                   FFButtonWidget(
                                                     onPressed: () async {
-                                                      _model.allGiftsByListID =
-                                                          await actions
-                                                              .getAllGiftsByListID(
-                                                        getJsonField(
-                                                          myListItem,
-                                                          r'''$.id''',
-                                                        ),
-                                                      );
-
                                                       context.pushNamed(
                                                         'MyListFinal',
                                                         queryParameters: {
@@ -300,17 +291,8 @@ class _SideNavigationComponentWidgetState
                                                             myListItem,
                                                             ParamType.JSON,
                                                           ),
-                                                          'giftList':
-                                                              serializeParam(
-                                                            _model
-                                                                .allGiftsByListID,
-                                                            ParamType.JSON,
-                                                            true,
-                                                          ),
                                                         }.withoutNulls,
                                                       );
-
-                                                      setState(() {});
                                                     },
                                                     text: getJsonField(
                                                       myListItem,
@@ -504,34 +486,14 @@ class _SideNavigationComponentWidgetState
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          _model.fetchedInitialData3 =
-                              await actions.fetchPaginatedItem(
-                            0,
-                          );
-                          FFAppState().giftGuideInitialData = _model
-                              .fetchedInitialData3!
-                              .toList()
-                              .cast<dynamic>();
-
-                          context.pushNamed('GiftGuidePaginatedCopy');
-
-                          setState(() {});
-                        },
-                        child: Text(
-                          'About',
-                          style:
-                              FlutterFlowTheme.of(context).titleMedium.override(
-                                    fontFamily: 'Manrope',
-                                    color: FlutterFlowTheme.of(context).white,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                        ),
+                      child: Text(
+                        'About',
+                        style:
+                            FlutterFlowTheme.of(context).titleMedium.override(
+                                  fontFamily: 'Manrope',
+                                  color: FlutterFlowTheme.of(context).white,
+                                  fontWeight: FontWeight.normal,
+                                ),
                       ),
                     ),
                   ],

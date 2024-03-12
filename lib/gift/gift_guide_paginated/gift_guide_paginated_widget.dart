@@ -3,7 +3,6 @@ import '/backend/supabase/supabase.dart';
 import '/components/add_gift_to_list_widget.dart';
 import '/components/empty_gift_guide_widget.dart';
 import '/components/filter_list_widget.dart';
-import '/components/nav/side_navigation_component/side_navigation_component_widget.dart';
 import '/flutter_flow/flutter_flow_choice_chips.dart';
 import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
@@ -11,6 +10,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/form_field_controller.dart';
+import '/nav/side_navigation_component/side_navigation_component_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
@@ -209,16 +209,24 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                         _model.textController
                                                             .text,
                                                       );
-                                                      _model.searchResultList =
-                                                          functions
-                                                              .sortListOfItems(
-                                                                  _model
-                                                                      .sorterValue!,
-                                                                  _model
-                                                                      .searchResult!
-                                                                      .toList())
-                                                              .toList()
-                                                              .cast<dynamic>();
+                                                      setState(() {
+                                                        _model
+                                                            .choiceChipsValueController
+                                                            ?.reset();
+                                                      });
+                                                      _model.searchResultList = functions
+                                                          .sortListOfItems(
+                                                              _model.sorterValue!,
+                                                              _model.searchResult!
+                                                                  .where((e) =>
+                                                                      getJsonField(
+                                                                        e,
+                                                                        r'''$.created_by''',
+                                                                      ) ==
+                                                                      null)
+                                                                  .toList())
+                                                          .toList()
+                                                          .cast<dynamic>();
                                                       setState(() {
                                                         FFAppState()
                                                                 .searchedResultList =
@@ -236,6 +244,8 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                                 .toList()
                                                                 .cast<
                                                                     dynamic>();
+                                                        FFAppState()
+                                                            .conditions = [];
                                                       });
 
                                                       setState(() {});
@@ -319,15 +329,25 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                           _model.choiceChipsValue!,
                                         );
                                         setState(() {
+                                          _model.textController?.clear();
+                                        });
+                                        setState(() {
                                           _model.category =
                                               _model.choiceChipsValue;
-                                          _model.choiceChipResultList = _model
-                                              .choiceChipSelectedList!
-                                              .toList()
-                                              .cast<dynamic>();
+                                          _model.choiceChipResultList =
+                                              _model.choiceChipSelectedList!
+                                                  .where((e) =>
+                                                      getJsonField(
+                                                        e,
+                                                        r'''$.created_by''',
+                                                      ) ==
+                                                      null)
+                                                  .toList()
+                                                  .cast<dynamic>();
                                         });
                                         setState(() {
                                           FFAppState().isFilterOn = false;
+                                          FFAppState().conditions = [];
                                         });
 
                                         setState(() {});
@@ -487,111 +507,115 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                           ),
                                         ),
                                       ),
-                                      Builder(
-                                        builder: (context) => FFButtonWidget(
-                                          onPressed: () async {
-                                            if (FFAppState().isFilterOn ==
-                                                true) {
-                                              setState(() {
-                                                FFAppState().isFilterOn = false;
-                                              });
-                                            } else {
-                                              await showDialog(
-                                                context: context,
-                                                builder: (dialogContext) {
-                                                  return Dialog(
-                                                    elevation: 0,
-                                                    insetPadding:
-                                                        EdgeInsets.zero,
-                                                    backgroundColor:
-                                                        Colors.transparent,
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                                1.0, 0.0)
-                                                            .resolve(
-                                                                Directionality.of(
-                                                                    context)),
-                                                    child: GestureDetector(
-                                                      onTap: () => _model
-                                                              .unfocusNode
-                                                              .canRequestFocus
-                                                          ? FocusScope.of(
+                                      FFButtonWidget(
+                                        onPressed: () async {
+                                          if (FFAppState().isFilterOn == true) {
+                                            setState(() {
+                                              FFAppState().isFilterOn = false;
+                                              FFAppState().conditions = [];
+                                            });
+                                          } else {
+                                            setState(() {
+                                              _model.choiceChipsValueController
+                                                  ?.reset();
+                                            });
+                                            setState(() {
+                                              _model.textController?.clear();
+                                            });
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              useSafeArea: true,
+                                              context: context,
+                                              builder: (context) {
+                                                return GestureDetector(
+                                                  onTap: () => _model
+                                                          .unfocusNode
+                                                          .canRequestFocus
+                                                      ? FocusScope.of(context)
+                                                          .requestFocus(_model
+                                                              .unfocusNode)
+                                                      : FocusScope.of(context)
+                                                          .unfocus(),
+                                                  child: Padding(
+                                                    padding:
+                                                        MediaQuery.viewInsetsOf(
+                                                            context),
+                                                    child: Container(
+                                                      height: MediaQuery.sizeOf(
                                                                   context)
-                                                              .requestFocus(_model
-                                                                  .unfocusNode)
-                                                          : FocusScope.of(
-                                                                  context)
-                                                              .unfocus(),
-                                                      child: Container(
-                                                        height: 800.0,
-                                                        width: 260.0,
-                                                        child:
-                                                            FilterListWidget(),
-                                                      ),
+                                                              .height *
+                                                          0.9,
+                                                      child: FilterListWidget(),
                                                     ),
-                                                  );
-                                                },
-                                              ).then(
-                                                  (value) => setState(() {}));
-                                            }
-                                          },
-                                          text: 'Filter',
-                                          icon: Icon(
-                                            Icons.filter_alt_outlined,
-                                            color: FFAppState().isFilterOn ==
-                                                    true
-                                                ? FlutterFlowTheme.of(context)
-                                                    .primaryBackground
-                                                : FlutterFlowTheme.of(context)
-                                                    .primaryText,
-                                            size: 20.0,
+                                                  ),
+                                                );
+                                              },
+                                            ).then(
+                                                (value) => safeSetState(() {}));
+                                          }
+                                        },
+                                        text: 'Filter',
+                                        icon: Icon(
+                                          Icons.filter_alt_outlined,
+                                          color: FFAppState().isFilterOn == true
+                                              ? FlutterFlowTheme.of(context)
+                                                  .primaryBackground
+                                              : FlutterFlowTheme.of(context)
+                                                  .primaryText,
+                                          size: 20.0,
+                                        ),
+                                        options: FFButtonOptions(
+                                          width: 80.0,
+                                          height: 40.0,
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 0.0, 8.0, 0.0),
+                                          iconPadding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 0.0, 0.0),
+                                          color: FFAppState().isFilterOn == true
+                                              ? FlutterFlowTheme.of(context)
+                                                  .primary
+                                              : FlutterFlowTheme.of(context)
+                                                  .primaryBackground,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .titleSmall
+                                              .override(
+                                                fontFamily: 'Manrope',
+                                                color:
+                                                    FFAppState().isFilterOn ==
+                                                            true
+                                                        ? FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryBackground
+                                                        : FlutterFlowTheme.of(
+                                                                context)
+                                                            .primaryText,
+                                                fontSize: 14.0,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                          elevation: 0.0,
+                                          borderSide: BorderSide(
+                                            color: FlutterFlowTheme.of(context)
+                                                .textFieldBorder,
+                                            width: 1.0,
                                           ),
-                                          options: FFButtonOptions(
-                                            width: 80.0,
-                                            height: 40.0,
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    8.0, 0.0, 8.0, 0.0),
-                                            iconPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 0.0, 0.0),
-                                            color: FFAppState().isFilterOn ==
-                                                    true
-                                                ? FlutterFlowTheme.of(context)
-                                                    .primary
-                                                : FlutterFlowTheme.of(context)
-                                                    .primaryBackground,
-                                            textStyle: FlutterFlowTheme.of(
-                                                    context)
-                                                .titleSmall
-                                                .override(
-                                                  fontFamily: 'Manrope',
-                                                  color:
-                                                      FFAppState().isFilterOn ==
-                                                              true
-                                                          ? FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryBackground
-                                                          : FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                  fontSize: 14.0,
-                                                  fontWeight: FontWeight.normal,
-                                                ),
-                                            elevation: 0.0,
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .textFieldBorder,
-                                              width: 1.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(24.0),
-                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(24.0),
                                         ),
                                       ),
                                     ],
                                   ),
+                                  if (false)
+                                    Text(
+                                      functions.queryBuilderWithRange(
+                                          FFAppState().conditions.toList()),
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium,
+                                    ),
                                 ]
                                     .divide(SizedBox(height: 12.0))
                                     .addToStart(SizedBox(height: 12.0))
@@ -668,7 +692,15 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                           Colors.transparent,
                                                       onTap: () async {
                                                         context.pushNamed(
-                                                            'GiftDetail');
+                                                          'GiftDetail',
+                                                          queryParameters: {
+                                                            'giftItem':
+                                                                serializeParam(
+                                                              searchResultsItem,
+                                                              ParamType.JSON,
+                                                            ),
+                                                          }.withoutNulls,
+                                                        );
                                                       },
                                                       child: Column(
                                                         mainAxisSize:
@@ -694,16 +726,33 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                                               8.0),
                                                                   child: Image
                                                                       .network(
-                                                                    getJsonField(
-                                                                      searchResultsItem,
-                                                                      r'''$.image_url''',
-                                                                    ).toString(),
+                                                                    valueOrDefault<
+                                                                        String>(
+                                                                      getJsonField(
+                                                                        searchResultsItem,
+                                                                        r'''$.image_url''',
+                                                                      )?.toString(),
+                                                                      'https://cdn.dribbble.com/users/7056161/screenshots/15861318/gift_4x.jpg',
+                                                                    ),
                                                                     width:
                                                                         150.0,
                                                                     height:
                                                                         150.0,
                                                                     fit: BoxFit
                                                                         .contain,
+                                                                    errorBuilder: (context,
+                                                                            error,
+                                                                            stackTrace) =>
+                                                                        Image
+                                                                            .asset(
+                                                                      'assets/images/error_image.jpeg',
+                                                                      width:
+                                                                          150.0,
+                                                                      height:
+                                                                          150.0,
+                                                                      fit: BoxFit
+                                                                          .contain,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
@@ -738,7 +787,10 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                                           16.0,
                                                                     ),
                                                                     Text(
-                                                                      'Expert Review',
+                                                                      getJsonField(
+                                                                        searchResultsItem,
+                                                                        r'''$.highlight_label''',
+                                                                      ).toString(),
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -1015,8 +1067,16 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                 highlightColor:
                                                     Colors.transparent,
                                                 onTap: () async {
-                                                  context
-                                                      .pushNamed('GiftDetail');
+                                                  context.pushNamed(
+                                                    'GiftDetail',
+                                                    queryParameters: {
+                                                      'giftItem':
+                                                          serializeParam(
+                                                        choiceChipItemItem,
+                                                        ParamType.JSON,
+                                                      ),
+                                                    }.withoutNulls,
+                                                  );
                                                 },
                                                 child: Container(
                                                   width: 150.0,
@@ -1051,14 +1111,28 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                                           8.0),
                                                               child:
                                                                   Image.network(
-                                                                getJsonField(
-                                                                  choiceChipItemItem,
-                                                                  r'''$.image_url''',
-                                                                ).toString(),
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  getJsonField(
+                                                                    choiceChipItemItem,
+                                                                    r'''$.image_url''',
+                                                                  )?.toString(),
+                                                                  'https://cdn.dribbble.com/users/7056161/screenshots/15861318/gift_4x.jpg',
+                                                                ),
                                                                 width: 150.0,
                                                                 height: 150.0,
                                                                 fit: BoxFit
                                                                     .contain,
+                                                                errorBuilder: (context,
+                                                                        error,
+                                                                        stackTrace) =>
+                                                                    Image.asset(
+                                                                  'assets/images/error_image.jpeg',
+                                                                  width: 150.0,
+                                                                  height: 150.0,
+                                                                  fit: BoxFit
+                                                                      .contain,
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
@@ -1092,7 +1166,10 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                                   size: 16.0,
                                                                 ),
                                                                 Text(
-                                                                  'Expert Review',
+                                                                  getJsonField(
+                                                                    choiceChipItemItem,
+                                                                    r'''$.highlight_label''',
+                                                                  ).toString(),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -1329,6 +1406,12 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                       _model.sorterValue!,
                                                       FFAppState()
                                                           .filteredList
+                                                          .where((e) =>
+                                                              getJsonField(
+                                                                e,
+                                                                r'''$.created_by''',
+                                                              ) ==
+                                                              null)
                                                           .toList())
                                                   .toList();
                                               if (firstFiveItems.isEmpty) {
@@ -1383,7 +1466,16 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                               .transparent,
                                                           onTap: () async {
                                                             context.pushNamed(
-                                                                'GiftDetail');
+                                                              'GiftDetail',
+                                                              queryParameters: {
+                                                                'giftItem':
+                                                                    serializeParam(
+                                                                  firstFiveItemsItem,
+                                                                  ParamType
+                                                                      .JSON,
+                                                                ),
+                                                              }.withoutNulls,
+                                                            );
                                                           },
                                                           child: Column(
                                                             mainAxisSize:
@@ -1417,16 +1509,30 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                                             BorderRadius.circular(0.0),
                                                                         child: Image
                                                                             .network(
-                                                                          getJsonField(
-                                                                            firstFiveItemsItem,
-                                                                            r'''$.image_url''',
-                                                                          ).toString(),
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            getJsonField(
+                                                                              firstFiveItemsItem,
+                                                                              r'''$.image_url''',
+                                                                            )?.toString(),
+                                                                            'https://cdn.dribbble.com/users/7056161/screenshots/15861318/gift_4x.jpg',
+                                                                          ),
                                                                           width:
                                                                               150.0,
                                                                           height:
                                                                               150.0,
                                                                           fit: BoxFit
                                                                               .cover,
+                                                                          errorBuilder: (context, error, stackTrace) =>
+                                                                              Image.asset(
+                                                                            'assets/images/error_image.jpeg',
+                                                                            width:
+                                                                                150.0,
+                                                                            height:
+                                                                                150.0,
+                                                                            fit:
+                                                                                BoxFit.cover,
+                                                                          ),
                                                                         ),
                                                                       ),
                                                                     ),
@@ -1463,7 +1569,10 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                                               16.0,
                                                                         ),
                                                                         Text(
-                                                                          'Expert Review',
+                                                                          getJsonField(
+                                                                            firstFiveItemsItem,
+                                                                            r'''$.highlight_label''',
+                                                                          ).toString(),
                                                                           style: FlutterFlowTheme.of(context)
                                                                               .bodyMedium
                                                                               .override(
@@ -1764,7 +1873,17 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                                     .transparent,
                                                             onTap: () async {
                                                               context.pushNamed(
-                                                                  'GiftDetail');
+                                                                'GiftDetail',
+                                                                queryParameters:
+                                                                    {
+                                                                  'giftItem':
+                                                                      serializeParam(
+                                                                    firstFiveItemsItem,
+                                                                    ParamType
+                                                                        .JSON,
+                                                                  ),
+                                                                }.withoutNulls,
+                                                              );
                                                             },
                                                             child: Column(
                                                               mainAxisSize:
@@ -1795,16 +1914,26 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                                               BorderRadius.circular(0.0),
                                                                           child:
                                                                               Image.network(
-                                                                            getJsonField(
-                                                                              firstFiveItemsItem,
-                                                                              r'''$.image_url''',
-                                                                            ).toString(),
+                                                                            valueOrDefault<String>(
+                                                                              getJsonField(
+                                                                                firstFiveItemsItem,
+                                                                                r'''$.image_url''',
+                                                                              )?.toString(),
+                                                                              'https://cdn.dribbble.com/users/7056161/screenshots/15861318/gift_4x.jpg',
+                                                                            ),
                                                                             width:
                                                                                 150.0,
                                                                             height:
                                                                                 150.0,
                                                                             fit:
                                                                                 BoxFit.cover,
+                                                                            errorBuilder: (context, error, stackTrace) =>
+                                                                                Image.asset(
+                                                                              'assets/images/error_image.jpeg',
+                                                                              width: 150.0,
+                                                                              height: 150.0,
+                                                                              fit: BoxFit.cover,
+                                                                            ),
                                                                           ),
                                                                         ),
                                                                       ),
@@ -1837,7 +1966,10 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                                                                 16.0,
                                                                           ),
                                                                           Text(
-                                                                            'Expert Review',
+                                                                            getJsonField(
+                                                                              firstFiveItemsItem,
+                                                                              r'''$.highlight_label''',
+                                                                            ).toString(),
                                                                             style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                   fontFamily: 'Manrope',
                                                                                   color: FlutterFlowTheme.of(context).primaryText,
