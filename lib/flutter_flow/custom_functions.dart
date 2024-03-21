@@ -936,3 +936,37 @@ String queryBuilder(List<String> conditions) {
 
   return queryParts.join('&');
 }
+
+String? formatDate(String? thisDate) {
+  if (thisDate == null) {
+    return null;
+  }
+  DateTime parsedDate = DateTime.parse(thisDate);
+  String formattedDate =
+      DateFormat('dd').format(parsedDate); // Get the day part
+  switch (formattedDate.endsWith('1') && !formattedDate.endsWith('11')) {
+    case true:
+      formattedDate += 'st';
+      break;
+    case false:
+      switch (formattedDate.endsWith('2') && !formattedDate.endsWith('12')) {
+        case true:
+          formattedDate += 'nd';
+          break;
+        case false:
+          switch (
+              formattedDate.endsWith('3') && !formattedDate.endsWith('13')) {
+            case true:
+              formattedDate += 'rd';
+              break;
+            case false:
+              formattedDate += 'th';
+              break;
+          }
+      }
+  }
+  formattedDate += ' ' +
+      DateFormat('MMMM yyyy')
+          .format(parsedDate); // Append the month and year part
+  return formattedDate;
+}

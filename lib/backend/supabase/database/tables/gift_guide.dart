@@ -50,4 +50,35 @@ class GiftGuideRow extends SupabaseDataRow {
   String? get highlightLabel => getField<String>('highlight_label');
   set highlightLabel(String? value) =>
       setField<String>('highlight_label', value);
+
+  dynamic? get metadata => getField<dynamic>('metadata');
+  set metadata(dynamic? value) => setField<dynamic>('metadata', value);
+
+  String? get url => getField<String>('url');
+  set url(String? value) => setField<String>('url', value);
+
+  String? get brand => getField<String>('brand');
+  set brand(String? value) => setField<String>('brand', value);
+
+  bool? get live => getField<bool>('live');
+  set live(bool? value) => setField<bool>('live', value);
+
+  String? get liveDetail => getField<String>('live_detail');
+  set liveDetail(String? value) => setField<String>('live_detail', value);
+
+  String? get description => getField<String>('description');
+  set description(String? value) => setField<String>('description', value);
+
+  double? get priceSale => getField<double>('price_sale');
+  set priceSale(double? value) => setField<double>('price_sale', value);
+
+  List<String> get imageThumbnails => getListField<String>('image_thumbnails');
+  set imageThumbnails(List<String>? value) =>
+      setListField<String>('image_thumbnails', value);
+
+  int? get brandId => getField<int>('brand_id');
+  set brandId(int? value) => setField<int>('brand_id', value);
+
+  int? get categoryId => getField<int>('category_id');
+  set categoryId(int? value) => setField<int>('category_id', value);
 }

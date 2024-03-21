@@ -1,7 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/home/email_sign_up/email_sign_up_widget.dart';
+import '/home/email_signup/email_signup_widget.dart';
 import '/nav/header_logo/header_logo_widget.dart';
 import '/nav/side_navigation_component/side_navigation_component_widget.dart';
 import 'home_widget.dart' show HomeWidget;
@@ -16,8 +16,8 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   final unfocusNode = FocusNode();
   // Model for HeaderLogo component.
   late HeaderLogoModel headerLogoModel;
-  // Model for emailSignUp component.
-  late EmailSignUpModel emailSignUpModel;
+  // Model for EmailSignup component.
+  late EmailSignupModel emailSignupModel;
   // Model for SideNavigationComponent component.
   late SideNavigationComponentModel sideNavigationComponentModel;
 
@@ -26,7 +26,7 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   @override
   void initState(BuildContext context) {
     headerLogoModel = createModel(context, () => HeaderLogoModel());
-    emailSignUpModel = createModel(context, () => EmailSignUpModel());
+    emailSignupModel = createModel(context, () => EmailSignupModel());
     sideNavigationComponentModel =
         createModel(context, () => SideNavigationComponentModel());
   }
@@ -35,7 +35,7 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
   void dispose() {
     unfocusNode.dispose();
     headerLogoModel.dispose();
-    emailSignUpModel.dispose();
+    emailSignupModel.dispose();
     sideNavigationComponentModel.dispose();
   }
 

@@ -54,12 +54,6 @@ class FFAppState extends ChangeNotifier {
     _pageId = _value;
   }
 
-  bool _IsToggled = false;
-  bool get IsToggled => _IsToggled;
-  set IsToggled(bool _value) {
-    _IsToggled = _value;
-  }
-
   List<dynamic> _giftGuideInitialData = [];
   List<dynamic> get giftGuideInitialData => _giftGuideInitialData;
   set giftGuideInitialData(List<dynamic> _value) {

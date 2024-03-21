@@ -4,8 +4,8 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/lists/list/list_widget.dart';
-import '/lists/list_create_new/list_create_new_widget.dart';
+import '/lists/gift_list/gift_list_widget.dart';
+import '/lists/new_list/new_list_widget.dart';
 import '/nav/header_logged_in/header_logged_in_widget.dart';
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -1159,7 +1159,7 @@ class _MyWishlistsWidgetState extends State<MyWishlistsWidget>
                                                   GoRouter.of(context)
                                                       .clearRedirectLocation();
 
-                                                  context.goNamedAuth('signIn',
+                                                  context.goNamedAuth('Signin',
                                                       context.mounted);
                                                 },
                                                 child: Row(
@@ -1280,11 +1280,11 @@ class _MyWishlistsWidgetState extends State<MyWishlistsWidget>
                                       children: [
                                         Expanded(
                                           child: wrapWithModel(
-                                            model: _model.listCreateNewModel,
+                                            model: _model.newListModel,
                                             updateCallback: () =>
                                                 setState(() {}),
                                             updateOnChange: true,
-                                            child: ListCreateNewWidget(),
+                                            child: NewListWidget(),
                                           ),
                                         ),
                                       ],
@@ -1311,10 +1311,10 @@ class _MyWishlistsWidgetState extends State<MyWishlistsWidget>
                                       children: [
                                         Expanded(
                                           child: wrapWithModel(
-                                            model: _model.listModel,
+                                            model: _model.giftListModel,
                                             updateCallback: () =>
                                                 setState(() {}),
-                                            child: ListWidget(
+                                            child: GiftListWidget(
                                               docRef: _model.whichListToShow!,
                                               doc: _model.whichDocToShow!,
                                             ),

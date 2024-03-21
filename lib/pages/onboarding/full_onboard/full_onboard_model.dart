@@ -76,7 +76,7 @@ class FullOnboardModel extends FlutterFlowModel<FullOnboardWidget> {
   // State field(s) for countryDropDown widget.
   String? countryDropDownValue;
   FormFieldController<String>? countryDropDownValueController;
-  // Model for profilePhotoUpload component.
+  // Model for ProfilePhotoUpload component.
   late ProfilePhotoUploadModel profilePhotoUploadModel;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;

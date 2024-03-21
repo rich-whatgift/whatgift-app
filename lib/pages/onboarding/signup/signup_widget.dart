@@ -1,7 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_toggle_icon.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -90,8 +89,6 @@ class _SignupWidgetState extends State<SignupWidget>
 
   @override
   Widget build(BuildContext context) {
-    context.watch<FFAppState>();
-
     return GestureDetector(
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
@@ -102,20 +99,6 @@ class _SignupWidgetState extends State<SignupWidget>
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
           actions: [],
           flexibleSpace: FlexibleSpaceBar(
             title: ClipRRect(
@@ -211,7 +194,7 @@ class _SignupWidgetState extends State<SignupWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                        0.0, 0.0, 0.0, 8.0),
                                     child: TextFormField(
                                       controller: _model.enterEmailController,
                                       focusNode: _model.enterEmailFocusNode,
@@ -530,11 +513,14 @@ class _SignupWidgetState extends State<SignupWidget>
                                     children: [
                                       ToggleIcon(
                                         onPressed: () async {
-                                          setState(() =>
-                                              FFAppState().IsToggled =
-                                                  !FFAppState().IsToggled);
+                                          setState(() => _model.isToggled =
+                                              !_model.isToggled);
+                                          setState(() {
+                                            _model.isToggled =
+                                                !_model.isToggled;
+                                          });
                                         },
-                                        value: FFAppState().IsToggled,
+                                        value: _model.isToggled,
                                         onIcon: Icon(
                                           Icons.check_circle_outlined,
                                           color: FlutterFlowTheme.of(context)
@@ -589,61 +575,82 @@ class _SignupWidgetState extends State<SignupWidget>
                                         0.0, 16.0, 0.0, 8.0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
-                                        if (_model
-                                                .enterPasswordController.text ==
-                                            _model.reEnterPasswordController
-                                                .text) {
-                                          GoRouter.of(context)
-                                              .prepareAuthEvent();
+                                        Function() _navigate = () {};
+                                        if (_model.isToggled == false) {
                                           if (_model.enterPasswordController
-                                                  .text !=
+                                                  .text ==
                                               _model.reEnterPasswordController
                                                   .text) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              SnackBar(
-                                                content: Text(
-                                                  'Passwords don\'t match!',
+                                            GoRouter.of(context)
+                                                .prepareAuthEvent();
+                                            if (_model.enterPasswordController
+                                                    .text !=
+                                                _model.reEnterPasswordController
+                                                    .text) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  content: Text(
+                                                    'Passwords don\'t match!',
+                                                  ),
                                                 ),
-                                              ),
+                                              );
+                                              return;
+                                            }
+
+                                            final user = await authManager
+                                                .createAccountWithEmail(
+                                              context,
+                                              _model.enterEmailController.text,
+                                              _model
+                                                  .enterPasswordController.text,
                                             );
-                                            return;
+                                            if (user == null) {
+                                              return;
+                                            }
+
+                                            _navigate = () =>
+                                                context.goNamedAuth(
+                                                    'UserProfile',
+                                                    context.mounted);
+                                            _model.insertNewUserRow =
+                                                await UserTable().insert({
+                                              'created_at':
+                                                  supaSerialize<DateTime>(
+                                                      getCurrentTimestamp),
+                                              'id': currentUserUid,
+                                              'email': _model
+                                                  .enterEmailController.text,
+                                            });
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text(
+                                                      'Passwords not matched'),
+                                                  content: Text(
+                                                      'Please enter the same password!'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
                                           }
-
-                                          final user = await authManager
-                                              .createAccountWithEmail(
-                                            context,
-                                            _model.enterEmailController.text,
-                                            _model.enterPasswordController.text,
-                                          );
-                                          if (user == null) {
-                                            return;
-                                          }
-
-                                          _model.insertNewUserRow =
-                                              await UserTable().insert({
-                                            'created_at':
-                                                supaSerialize<DateTime>(
-                                                    getCurrentTimestamp),
-                                            'id': currentUserUid,
-                                            'email': _model
-                                                .enterEmailController.text,
-                                          });
-                                          setState(() {
-                                            FFAppState().AllMyLists = [];
-                                          });
-
-                                          context.pushNamedAuth(
-                                              'UserProfile', context.mounted);
                                         } else {
                                           await showDialog(
                                             context: context,
                                             builder: (alertDialogContext) {
                                               return AlertDialog(
-                                                title: Text(
-                                                    'Passwords not matched'),
+                                                title: Text('Action Required'),
                                                 content: Text(
-                                                    'Please enter the same password!'),
+                                                    'Please accept our Terms and Privacy Policy to continue. Exiting if you disagree.'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
@@ -656,6 +663,8 @@ class _SignupWidgetState extends State<SignupWidget>
                                             },
                                           );
                                         }
+
+                                        _navigate();
 
                                         setState(() {});
                                       },
@@ -746,53 +755,70 @@ class _SignupWidgetState extends State<SignupWidget>
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Expanded(
-                                          child: Container(
-                                            width: 150.0,
-                                            height: 50.0,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryBackground,
-                                              borderRadius:
-                                                  BorderRadius.circular(24.0),
-                                              border: Border.all(
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              GoRouter.of(context)
+                                                  .prepareAuthEvent();
+                                              final user = await authManager
+                                                  .signInWithGoogle(context);
+                                              if (user == null) {
+                                                return;
+                                              }
+
+                                              context.goNamedAuth('UserProfile',
+                                                  context.mounted);
+                                            },
+                                            child: Container(
+                                              width: 150.0,
+                                              height: 50.0,
+                                              decoration: BoxDecoration(
                                                 color:
                                                     FlutterFlowTheme.of(context)
-                                                        .textFieldBorder,
-                                              ),
-                                            ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  child: SvgPicture.asset(
-                                                    'assets/images/Google__G__logo.svg',
-                                                    width: 20.0,
-                                                    height: 20.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  'Google',
-                                                  style: FlutterFlowTheme.of(
+                                                        .primaryBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(24.0),
+                                                border: Border.all(
+                                                  color: FlutterFlowTheme.of(
                                                           context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily: 'Manrope',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryText,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
+                                                      .textFieldBorder,
                                                 ),
-                                              ].divide(SizedBox(width: 15.0)),
+                                              ),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: SvgPicture.asset(
+                                                      'assets/images/Google__G__logo.svg',
+                                                      width: 20.0,
+                                                      height: 20.0,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    'Google',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily: 'Manrope',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryText,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                  ),
+                                                ].divide(SizedBox(width: 15.0)),
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -861,7 +887,6 @@ class _SignupWidgetState extends State<SignupWidget>
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                // You will have to add an action on this rich text to go to your login page.
                                 Align(
                                   alignment: AlignmentDirectional(0.0, 0.0),
                                   child: Padding(
@@ -874,7 +899,7 @@ class _SignupWidgetState extends State<SignupWidget>
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
                                         context.pushNamed(
-                                          'signIn',
+                                          'Signin',
                                           extra: <String, dynamic>{
                                             kTransitionInfoKey: TransitionInfo(
                                               hasTransition: true,
@@ -911,7 +936,7 @@ class _SignupWidgetState extends State<SignupWidget>
                                                   SystemMouseCursors.click,
                                               recognizer: TapGestureRecognizer()
                                                 ..onTap = () async {
-                                                  context.pushNamed('signIn');
+                                                  context.pushNamed('Signin');
                                                 },
                                             )
                                           ],

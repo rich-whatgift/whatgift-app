@@ -2195,7 +2195,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   child: wrapWithModel(
                     model: _model.sideNavigationComponentModel2,
                     updateCallback: () => setState(() {}),
-                    child: SideNavigationComponentWidget(),
+                    child: SideNavigationComponentWidget(
+                      purpleStyle: false,
+                      lightStyle: false,
+                    ),
                   ),
                 ),
             ],

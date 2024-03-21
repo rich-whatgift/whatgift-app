@@ -23,7 +23,7 @@ class ProfileSettingsModel extends FlutterFlowModel<ProfileSettingsWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  // Model for profilePhotoUpload component.
+  // Model for ProfilePhotoUpload component.
   late ProfilePhotoUploadModel profilePhotoUploadModel;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode1;

@@ -62,17 +62,18 @@ class SelectFilteredGiftGuideItemsCall {
 class GetUserInfoCall {
   static Future<ApiCallResponse> call({
     String? userId = '',
+    String? apiKey =
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlbXdja2xrcWJta2tndXBrbW9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDczOTU3NjcsImV4cCI6MjAyMjk3MTc2N30.JV1I3DiLkjKQ0LVyI90V3lAKYMO7whqBAliilQTQtc4',
   }) async {
     return ApiManager.instance.makeApiCall(
-      callName: 'getUserInfo',
+      callName: 'GetUserInfo',
       apiUrl:
-          'https://aemwcklkqbmkkgupkmoo.supabase.co/rest/v1/user?id=${userId}',
+          'https://aemwcklkqbmkkgupkmoo.supabase.co/rest/v1/user?id=eq.${userId}',
       callType: ApiCallType.GET,
       headers: {
-        'apikey':
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlbXdja2xrcWJta2tndXBrbW9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDczOTU3NjcsImV4cCI6MjAyMjk3MTc2N30.JV1I3DiLkjKQ0LVyI90V3lAKYMO7whqBAliilQTQtc4',
         'Authorization':
             'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlbXdja2xrcWJta2tndXBrbW9vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDczOTU3NjcsImV4cCI6MjAyMjk3MTc2N30.JV1I3DiLkjKQ0LVyI90V3lAKYMO7whqBAliilQTQtc4',
+        'apiKey': '${apiKey}',
       },
       params: {},
       returnBody: true,
@@ -82,6 +83,43 @@ class GetUserInfoCall {
       alwaysAllowBody: false,
     );
   }
+
+  static String? dateOfBirth(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].birthday''',
+      ));
+  static String? firstName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].first_name''',
+      ));
+  static String? lastName(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].last_name''',
+      ));
+  static String? userBio(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].bio''',
+      ));
+  static String? userCountry(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].country''',
+      ));
+  static String? userGender(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].gender''',
+      ));
+  static String? userEmail(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$[:].email''',
+      ));
+  static bool? isProfileCreated(dynamic response) =>
+      castToType<bool>(getJsonField(
+        response,
+        r'''$[:].is_profile_created''',
+      ));
 }
 
 class ApiPagingParams {
