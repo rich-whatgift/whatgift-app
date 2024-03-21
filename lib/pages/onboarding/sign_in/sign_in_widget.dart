@@ -1,7 +1,6 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
 import 'sign_in_model.dart';
 export 'sign_in_model.dart';
 
@@ -37,22 +37,22 @@ class _SignInWidgetState extends State<SignInWidget>
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: 0.0,
-          end: 1.0,
+          begin: 0,
+          end: 1,
         ),
         MoveEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
-          begin: Offset(0.0, 140.0),
-          end: Offset(0.0, 0.0),
+          begin: Offset(0, 140),
+          end: Offset(0, 0),
         ),
         ScaleEffect(
           curve: Curves.easeInOut,
           delay: 0.ms,
           duration: 300.ms,
           begin: Offset(0.9, 0.9),
-          end: Offset(1.0, 1.0),
+          end: Offset(1, 1),
         ),
         TiltEffect(
           curve: Curves.easeInOut,
@@ -94,37 +94,23 @@ class _SignInWidgetState extends State<SignInWidget>
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: FlutterFlowTheme.of(context).transparent,
           automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 60.0,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: FlutterFlowTheme.of(context).primaryText,
-              size: 30.0,
-            ),
-            onPressed: () async {
-              context.pop();
-            },
-          ),
           actions: [],
           flexibleSpace: FlexibleSpaceBar(
             title: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
+              borderRadius: BorderRadius.circular(8),
               child: SvgPicture.asset(
                 'assets/images/whatgift_logo_v1_primary_purple_svg.svg',
-                width: 100.0,
-                height: 50.0,
+                width: 100,
+                height: 50,
                 fit: BoxFit.contain,
               ),
             ),
             centerTitle: true,
             expandedTitleScale: 1.0,
           ),
-          elevation: 0.0,
+          elevation: 0,
         ),
         body: SafeArea(
           top: true,
@@ -135,40 +121,40 @@ class _SignInWidgetState extends State<SignInWidget>
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Align(
-                  alignment: AlignmentDirectional(1.0, 0.0),
+                  alignment: AlignmentDirectional(1, 0),
                   child: Padding(
-                    padding: EdgeInsets.all(24.0),
+                    padding: EdgeInsets.all(24),
                     child: Container(
                       constraints: BoxConstraints(
-                        maxWidth: 560.0,
+                        maxWidth: 560,
                       ),
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).primaryBackground,
                         boxShadow: [
                           BoxShadow(
-                            blurRadius: 48.0,
+                            blurRadius: 48,
                             color: Color(0x0D000000),
-                            offset: Offset(0.0, 0.0),
-                            spreadRadius: 0.0,
+                            offset: Offset(0, 0),
+                            spreadRadius: 0,
                           )
                         ],
-                        borderRadius: BorderRadius.circular(16.0),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0, 0),
                             child: Padding(
-                              padding: EdgeInsets.all(20.0),
+                              padding: EdgeInsets.all(20),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0, 0),
                                     child: Text(
                                       'Sign In',
                                       textAlign: TextAlign.center,
@@ -177,10 +163,10 @@ class _SignInWidgetState extends State<SignInWidget>
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0, 0),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 8.0, 0.0, 24.0),
+                                          0, 8, 0, 24),
                                       child: Text(
                                         'Your genie awaits',
                                         textAlign: TextAlign.center,
@@ -191,7 +177,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 8.0),
+                                        0, 0, 0, 8),
                                     child: Text(
                                       'Email',
                                       style: FlutterFlowTheme.of(context)
@@ -205,7 +191,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 16.0),
+                                        0, 0, 0, 16),
                                     child: TextFormField(
                                       controller: _model.emailTextController,
                                       focusNode: _model.textFieldFocusNode1,
@@ -220,7 +206,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .accent4,
-                                              fontSize: 12.0,
+                                              fontSize: 12,
                                             ),
                                         alignLabelWithHint: false,
                                         hintText: 'Enter your email',
@@ -231,46 +217,46 @@ class _SignInWidgetState extends State<SignInWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .accent4,
-                                              fontSize: 12.0,
+                                              fontSize: 12,
                                             ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFFE5E5E5),
-                                            width: 1.0,
+                                            width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(24.0),
+                                              BorderRadius.circular(24),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
-                                            width: 1.0,
+                                            width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(24.0),
+                                              BorderRadius.circular(24),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
                                                 .error,
-                                            width: 1.0,
+                                            width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(24.0),
+                                              BorderRadius.circular(24),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
                                                 .error,
-                                            width: 1.0,
+                                            width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(24.0),
+                                              BorderRadius.circular(24),
                                         ),
                                         filled: true,
                                         fillColor: Color(0xFFFAFAFA),
-                                        contentPadding: EdgeInsets.all(16.0),
+                                        contentPadding: EdgeInsets.all(16),
                                       ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -278,7 +264,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                             fontFamily: 'Manrope',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 12.0,
+                                            fontSize: 12,
                                           ),
                                       maxLines: null,
                                       validator: _model
@@ -288,7 +274,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 8.0),
+                                        0, 0, 0, 8),
                                     child: Text(
                                       'Password',
                                       style: FlutterFlowTheme.of(context)
@@ -302,7 +288,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 0.0, 0.0, 8.0),
+                                        0, 0, 0, 8),
                                     child: TextFormField(
                                       controller: _model.passwordTextController,
                                       focusNode: _model.textFieldFocusNode2,
@@ -317,7 +303,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .accent4,
-                                              fontSize: 12.0,
+                                              fontSize: 12,
                                             ),
                                         alignLabelWithHint: false,
                                         hintText: 'Enter password',
@@ -328,46 +314,46 @@ class _SignInWidgetState extends State<SignInWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .accent4,
-                                              fontSize: 12.0,
+                                              fontSize: 12,
                                             ),
                                         enabledBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0xFFE5E5E5),
-                                            width: 1.0,
+                                            width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(24.0),
+                                              BorderRadius.circular(24),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
                                                 .primary,
-                                            width: 1.0,
+                                            width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(24.0),
+                                              BorderRadius.circular(24),
                                         ),
                                         errorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
                                                 .error,
-                                            width: 1.0,
+                                            width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(24.0),
+                                              BorderRadius.circular(24),
                                         ),
                                         focusedErrorBorder: OutlineInputBorder(
                                           borderSide: BorderSide(
                                             color: FlutterFlowTheme.of(context)
                                                 .error,
-                                            width: 1.0,
+                                            width: 1,
                                           ),
                                           borderRadius:
-                                              BorderRadius.circular(24.0),
+                                              BorderRadius.circular(24),
                                         ),
                                         filled: true,
                                         fillColor: Color(0xFFFAFAFA),
-                                        contentPadding: EdgeInsets.all(16.0),
+                                        contentPadding: EdgeInsets.all(16),
                                         suffixIcon: InkWell(
                                           onTap: () => setState(
                                             () => _model.passwordVisibility =
@@ -381,7 +367,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                                 : Icons.visibility_off_outlined,
                                             color: FlutterFlowTheme.of(context)
                                                 .black,
-                                            size: 20.0,
+                                            size: 20,
                                           ),
                                         ),
                                       ),
@@ -391,7 +377,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                             fontFamily: 'Manrope',
                                             color: FlutterFlowTheme.of(context)
                                                 .primaryText,
-                                            fontSize: 12.0,
+                                            fontSize: 12,
                                           ),
                                       validator: _model
                                           .passwordTextControllerValidator
@@ -399,7 +385,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                     ),
                                   ),
                                   Align(
-                                    alignment: AlignmentDirectional(1.0, 0.0),
+                                    alignment: AlignmentDirectional(1, 0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
                                       focusColor: Colors.transparent,
@@ -424,7 +410,7 @@ class _SignInWidgetState extends State<SignInWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 24.0, 0.0, 0.0),
+                                        0, 24, 0, 0),
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         GoRouter.of(context).prepareAuthEvent();
@@ -463,15 +449,13 @@ class _SignInWidgetState extends State<SignInWidget>
                                       },
                                       text: 'Sign In',
                                       options: FFButtonOptions(
-                                        width:
-                                            MediaQuery.sizeOf(context).width *
-                                                1.0,
-                                        height: 52.0,
+                                        width: MediaQuery.sizeOf(context).width,
+                                        height: 52,
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            24.0, 14.0, 24.0, 14.0),
+                                            24, 14, 24, 14),
                                         iconPadding:
                                             EdgeInsetsDirectional.fromSTEB(
-                                                0.0, 0.0, 0.0, 0.0),
+                                                0, 0, 0, 0),
                                         color: FlutterFlowTheme.of(context)
                                             .buttonPrimarySolid,
                                         textStyle: GoogleFonts.getFont(
@@ -479,16 +463,15 @@ class _SignInWidgetState extends State<SignInWidget>
                                           color: FlutterFlowTheme.of(context)
                                               .primaryText,
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 16.0,
+                                          fontSize: 16,
                                           fontStyle: FontStyle.normal,
                                           height: 1.5,
                                         ),
-                                        elevation: 0.0,
+                                        elevation: 0,
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(24.0),
+                                        borderRadius: BorderRadius.circular(24),
                                       ),
                                     ),
                                   ),
@@ -499,10 +482,10 @@ class _SignInWidgetState extends State<SignInWidget>
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           SizedBox(
-                                            width: 80.0,
+                                            width: 80,
                                             child: Divider(
-                                              height: 60.0,
-                                              thickness: 1.0,
+                                              height: 60,
+                                              thickness: 1,
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .accent4,
@@ -527,10 +510,10 @@ class _SignInWidgetState extends State<SignInWidget>
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           SizedBox(
-                                            width: 80.0,
+                                            width: 80,
                                             child: Divider(
-                                              height: 60.0,
-                                              thickness: 1.0,
+                                              height: 60,
+                                              thickness: 1,
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .accent4,
@@ -542,20 +525,20 @@ class _SignInWidgetState extends State<SignInWidget>
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 1.0, 0.0, 0.0),
+                                        0, 1, 0, 0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Expanded(
                                           child: Container(
-                                            width: 150.0,
-                                            height: 50.0,
+                                            width: 150,
+                                            height: 50,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
                                               borderRadius:
-                                                  BorderRadius.circular(24.0),
+                                                  BorderRadius.circular(24),
                                               border: Border.all(
                                                 color:
                                                     FlutterFlowTheme.of(context)
@@ -569,12 +552,11 @@ class _SignInWidgetState extends State<SignInWidget>
                                               children: [
                                                 ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
+                                                      BorderRadius.circular(8),
                                                   child: SvgPicture.asset(
                                                     'assets/images/Google__G__logo.svg',
-                                                    width: 20.0,
-                                                    height: 20.0,
+                                                    width: 20,
+                                                    height: 20,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
@@ -593,20 +575,20 @@ class _SignInWidgetState extends State<SignInWidget>
                                                             FontWeight.w500,
                                                       ),
                                                 ),
-                                              ].divide(SizedBox(width: 15.0)),
+                                              ].divide(SizedBox(width: 15)),
                                             ),
                                           ),
                                         ),
                                         Expanded(
                                           child: Container(
-                                            width: 150.0,
-                                            height: 50.0,
+                                            width: 150,
+                                            height: 50,
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
                                               borderRadius:
-                                                  BorderRadius.circular(24.0),
+                                                  BorderRadius.circular(24),
                                               border: Border.all(
                                                 color:
                                                     FlutterFlowTheme.of(context)
@@ -620,12 +602,11 @@ class _SignInWidgetState extends State<SignInWidget>
                                               children: [
                                                 ClipRRect(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
+                                                      BorderRadius.circular(8),
                                                   child: SvgPicture.asset(
                                                     'assets/images/apple-logo-svgrepo-com.svg',
-                                                    width: 20.0,
-                                                    height: 20.0,
+                                                    width: 20,
+                                                    height: 20,
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
@@ -644,11 +625,11 @@ class _SignInWidgetState extends State<SignInWidget>
                                                             FontWeight.w500,
                                                       ),
                                                 ),
-                                              ].divide(SizedBox(width: 15.0)),
+                                              ].divide(SizedBox(width: 15)),
                                             ),
                                           ),
                                         ),
-                                      ].divide(SizedBox(width: 12.0)),
+                                      ].divide(SizedBox(width: 12)),
                                     ),
                                   ),
                                 ],
@@ -656,17 +637,17 @@ class _SignInWidgetState extends State<SignInWidget>
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 30.0),
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 30),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
+                                  alignment: AlignmentDirectional(0, 0),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 12.0, 0.0, 12.0),
+                                        0, 12, 0, 12),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
                                       focusColor: Colors.transparent,
