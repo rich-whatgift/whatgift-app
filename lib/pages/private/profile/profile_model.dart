@@ -21,25 +21,25 @@ class ProfileModel extends FlutterFlowModel<ProfileWidget> {
   late SideNavigationComponentModel sideNavigationComponentModel1;
   // Model for HeaderLogo component.
   late HeaderLogoModel headerLogoModel;
-  // Model for badgeCount component.
+  // Model for BadgeCount component.
   late BadgeCountModel badgeCountModel1;
-  // Model for badgeCount component.
+  // Model for BadgeCount component.
   late BadgeCountModel badgeCountModel2;
-  // Model for badgeCount component.
+  // Model for BadgeCount component.
   late BadgeCountModel badgeCountModel3;
-  // Model for badgeCount component.
+  // Model for BadgeCount component.
   late BadgeCountModel badgeCountModel4;
-  // Model for badgeCount component.
+  // Model for BadgeCount component.
   late BadgeCountModel badgeCountModel5;
-  // Model for badgeCount component.
+  // Model for BadgeCount component.
   late BadgeCountModel badgeCountModel6;
-  // Model for badgeCount component.
+  // Model for BadgeCount component.
   late BadgeCountModel badgeCountModel7;
-  // Model for badgeCount component.
+  // Model for BadgeCount component.
   late BadgeCountModel badgeCountModel8;
-  // Model for badgeCount component.
+  // Model for BadgeCount component.
   late BadgeCountModel badgeCountModel9;
-  // Model for badgeCount component.
+  // Model for BadgeCount component.
   late BadgeCountModel badgeCountModel10;
   // Model for SideNavigationComponent component.
   late SideNavigationComponentModel sideNavigationComponentModel2;

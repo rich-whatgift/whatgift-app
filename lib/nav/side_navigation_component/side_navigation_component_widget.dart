@@ -614,7 +614,7 @@ class _SideNavigationComponentWidgetState
                                         .clearRedirectLocation();
 
                                     context.goNamedAuth(
-                                        'signIn', context.mounted);
+                                        'Signin', context.mounted);
                                   },
                                   child: FaIcon(
                                     FontAwesomeIcons.signOutAlt,
@@ -641,7 +641,7 @@ class _SideNavigationComponentWidgetState
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                context.pushNamed('signIn');
+                                context.pushNamed('Signin');
 
                                 _model.updatePage(() {
                                   FFAppState().navSidebar = false;
@@ -676,7 +676,7 @@ class _SideNavigationComponentWidgetState
                           Expanded(
                             child: FFButtonWidget(
                               onPressed: () async {
-                                context.pushNamed('signup');
+                                context.pushNamed('Signup');
 
                                 _model.updatePage(() {
                                   FFAppState().navSidebar = false;

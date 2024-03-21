@@ -81,13 +81,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? UserProfileWidget() : SignInWidget(),
+          appStateNotifier.loggedIn ? UserProfileWidget() : SigninWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? UserProfileWidget() : SignInWidget(),
+              appStateNotifier.loggedIn ? UserProfileWidget() : SigninWidget(),
         ),
         FFRoute(
           name: 'SplashScreen',
@@ -95,22 +95,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => SplashScreenWidget(),
         ),
         FFRoute(
-          name: 'myWishlists',
+          name: 'MyWishlists',
           path: '/myWishlists',
           builder: (context, params) => MyWishlistsWidget(),
         ),
         FFRoute(
-          name: 'signIn',
-          path: '/signIn',
-          builder: (context, params) => SignInWidget(),
+          name: 'Signin',
+          path: '/signin',
+          builder: (context, params) => SigninWidget(),
         ),
         FFRoute(
-          name: 'home',
+          name: 'Home',
           path: '/home',
           builder: (context, params) => HomeWidget(),
         ),
         FFRoute(
-          name: 'profile',
+          name: 'Profile',
           path: '/profile',
           builder: (context, params) => ProfileWidget(
             newAccountJustMade:
@@ -118,47 +118,47 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           ),
         ),
         FFRoute(
-          name: 'navSidebar',
+          name: 'NavSidebar',
           path: '/navSidebar',
           builder: (context, params) => NavSidebarWidget(),
         ),
         FFRoute(
-          name: 'createEvent',
+          name: 'CreateEvent',
           path: '/createEvent',
           builder: (context, params) => CreateEventWidget(),
         ),
         FFRoute(
-          name: 'profileSettings',
+          name: 'ProfileSettings',
           path: '/profileSettings',
           builder: (context, params) => ProfileSettingsWidget(),
         ),
         FFRoute(
-          name: 'onboardingStep1',
-          path: '/onboardingStep1',
-          builder: (context, params) => OnboardingStep1Widget(),
+          name: 'OnboardingStepOne',
+          path: '/onboardingStepOne',
+          builder: (context, params) => OnboardingStepOneWidget(),
         ),
         FFRoute(
-          name: 'onboardingStep2',
-          path: '/onboardingStep2',
-          builder: (context, params) => OnboardingStep2Widget(),
+          name: 'OnboardingStepTwo',
+          path: '/onboardingStepTwo',
+          builder: (context, params) => OnboardingStepTwoWidget(),
         ),
         FFRoute(
-          name: 'onboardingStep3',
-          path: '/onboardingStep3',
-          builder: (context, params) => OnboardingStep3Widget(),
+          name: 'OnboardingStepThree',
+          path: '/onboardingStepThree',
+          builder: (context, params) => OnboardingStepThreeWidget(),
         ),
         FFRoute(
-          name: 'forgotPassword',
+          name: 'ForgotPassword',
           path: '/forgotPassword',
           builder: (context, params) => ForgotPasswordWidget(),
         ),
         FFRoute(
-          name: 'signup',
+          name: 'Signup',
           path: '/signup',
           builder: (context, params) => SignupWidget(),
         ),
         FFRoute(
-          name: 'personalise',
+          name: 'Personalise',
           path: '/personalise',
           builder: (context, params) => PersonaliseWidget(),
         ),
@@ -197,6 +197,40 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'FullOnboard',
           path: '/fullOnboard',
           builder: (context, params) => FullOnboardWidget(),
+        ),
+        FFRoute(
+          name: 'Group',
+          path: '/group',
+          builder: (context, params) => GroupWidget(),
+        ),
+        FFRoute(
+          name: 'MembersGift',
+          path: '/membersGift',
+          builder: (context, params) => MembersGiftWidget(
+            listRow: params.getParam('listRow', ParamType.JSON),
+          ),
+        ),
+        FFRoute(
+          name: 'PurchasedGift',
+          path: '/purchasedGift',
+          builder: (context, params) => PurchasedGiftWidget(
+            listRow: params.getParam('listRow', ParamType.JSON),
+          ),
+        ),
+        FFRoute(
+          name: 'MyEvent',
+          path: '/myEvent',
+          builder: (context, params) => MyEventWidget(),
+        ),
+        FFRoute(
+          name: 'EventDetail',
+          path: '/eventDetail',
+          builder: (context, params) => EventDetailWidget(),
+        ),
+        FFRoute(
+          name: 'GroupSetting',
+          path: '/groupSetting',
+          builder: (context, params) => GroupSettingWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -363,7 +397,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.location);
-            return '/signIn';
+            return '/signin';
           }
           return null;
         },

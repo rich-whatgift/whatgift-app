@@ -210,7 +210,7 @@ class _HeaderLogoWidgetState extends State<HeaderLogoWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('home');
+                    context.pushNamed('Home');
                   },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
@@ -235,7 +235,7 @@ class _HeaderLogoWidgetState extends State<HeaderLogoWidget> {
                   hoverColor: Colors.transparent,
                   highlightColor: Colors.transparent,
                   onTap: () async {
-                    context.pushNamed('home');
+                    context.pushNamed('Home');
                   },
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8.0),
@@ -256,7 +256,7 @@ class _HeaderLogoWidgetState extends State<HeaderLogoWidget> {
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                 child: FFButtonWidget(
                   onPressed: () async {
-                    context.pushNamed('signIn');
+                    context.pushNamed('Signin');
                   },
                   text: 'Sign In',
                   options: FFButtonOptions(

@@ -87,7 +87,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
                                   0.0, 0.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('signup');
+                                  context.pushNamed('Signup');
                                 },
                                 text: 'Register',
                                 options: FFButtonOptions(
@@ -121,7 +121,7 @@ class _SplashScreenWidgetState extends State<SplashScreenWidget> {
                                   0.0, 0.0, 0.0, 16.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  context.pushNamed('signIn');
+                                  context.pushNamed('Signin');
                                 },
                                 text: 'Login',
                                 options: FFButtonOptions(

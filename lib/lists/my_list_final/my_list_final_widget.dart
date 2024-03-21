@@ -1,11 +1,11 @@
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
-import '/components/empty_gift_list_widget.dart';
-import '/components/manual_gift_creation_widget.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/gift/manual_gift_creation/manual_gift_creation_widget.dart';
+import '/my_list_components/empty_gift_list/empty_gift_list_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

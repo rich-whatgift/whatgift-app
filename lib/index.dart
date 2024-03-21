@@ -3,25 +3,24 @@ export '/pages/public/splash_screen/splash_screen_widget.dart'
     show SplashScreenWidget;
 export '/pages/private/my_wishlists/my_wishlists_widget.dart'
     show MyWishlistsWidget;
-export '/pages/onboarding/sign_in/sign_in_widget.dart' show SignInWidget;
+export '/pages/onboarding/signin/signin_widget.dart' show SigninWidget;
 export '/pages/public/home/home_widget.dart' show HomeWidget;
 export '/pages/private/profile/profile_widget.dart' show ProfileWidget;
 export '/pages/public/nav_sidebar/nav_sidebar_widget.dart'
     show NavSidebarWidget;
-export '/pages/private/create_event/create_event_widget.dart'
-    show CreateEventWidget;
+export '/create_event/create_event_widget.dart' show CreateEventWidget;
 export '/pages/private/profile_settings/profile_settings_widget.dart'
     show ProfileSettingsWidget;
-export '/pages/onboarding/onboarding_step1/onboarding_step1_widget.dart'
-    show OnboardingStep1Widget;
-export '/pages/onboarding/onboarding_step2/onboarding_step2_widget.dart'
-    show OnboardingStep2Widget;
-export '/pages/onboarding/onboarding_step3/onboarding_step3_widget.dart'
-    show OnboardingStep3Widget;
+export '/pages/onboarding/onboarding_step_one/onboarding_step_one_widget.dart'
+    show OnboardingStepOneWidget;
+export '/pages/onboarding/onboarding_step_two/onboarding_step_two_widget.dart'
+    show OnboardingStepTwoWidget;
+export '/pages/onboarding/onboarding_step_three/onboarding_step_three_widget.dart'
+    show OnboardingStepThreeWidget;
 export '/pages/onboarding/forgot_password/forgot_password_widget.dart'
     show ForgotPasswordWidget;
 export '/pages/onboarding/signup/signup_widget.dart' show SignupWidget;
-export '/pages/onboarding/personalise/personalise_widget.dart'
+export '/pages/private/personalise/personalise_widget.dart'
     show PersonaliseWidget;
 export '/pages/private/user_profile/user_profile_widget.dart'
     show UserProfileWidget;
@@ -32,3 +31,10 @@ export '/lists/my_list/my_list_widget.dart' show MyListWidget;
 export '/lists/my_list_final/my_list_final_widget.dart' show MyListFinalWidget;
 export '/pages/onboarding/full_onboard/full_onboard_widget.dart'
     show FullOnboardWidget;
+export '/group/group/group_widget.dart' show GroupWidget;
+export '/group/members_gift/members_gift_widget.dart' show MembersGiftWidget;
+export '/group/purchased_gift/purchased_gift_widget.dart'
+    show PurchasedGiftWidget;
+export '/my_event/my_event_widget.dart' show MyEventWidget;
+export '/event_detail/event_detail_widget.dart' show EventDetailWidget;
+export '/group/group_setting/group_setting_widget.dart' show GroupSettingWidget;

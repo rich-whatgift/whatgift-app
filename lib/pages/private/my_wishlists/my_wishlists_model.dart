@@ -4,8 +4,8 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/lists/list/list_widget.dart';
-import '/lists/list_create_new/list_create_new_widget.dart';
+import '/lists/gift_list/gift_list_widget.dart';
+import '/lists/new_list/new_list_widget.dart';
 import '/nav/header_logged_in/header_logged_in_widget.dart';
 import 'dart:async';
 import 'my_wishlists_widget.dart' show MyWishlistsWidget;
@@ -37,10 +37,10 @@ class MyWishlistsModel extends FlutterFlowModel<MyWishlistsWidget> {
   ScrollController? columnController;
   // State field(s) for ListView widget.
   ScrollController? listViewController;
-  // Model for listCreateNew component.
-  late ListCreateNewModel listCreateNewModel;
-  // Model for list component.
-  late ListModel listModel;
+  // Model for NewList component.
+  late NewListModel newListModel;
+  // Model for GiftList component.
+  late GiftListModel giftListModel;
 
   /// Initialization and disposal methods.
 
@@ -50,8 +50,8 @@ class MyWishlistsModel extends FlutterFlowModel<MyWishlistsWidget> {
     rowLists = ScrollController();
     columnController = ScrollController();
     listViewController = ScrollController();
-    listCreateNewModel = createModel(context, () => ListCreateNewModel());
-    listModel = createModel(context, () => ListModel());
+    newListModel = createModel(context, () => NewListModel());
+    giftListModel = createModel(context, () => GiftListModel());
   }
 
   @override
@@ -61,8 +61,8 @@ class MyWishlistsModel extends FlutterFlowModel<MyWishlistsWidget> {
     rowLists?.dispose();
     columnController?.dispose();
     listViewController?.dispose();
-    listCreateNewModel.dispose();
-    listModel.dispose();
+    newListModel.dispose();
+    giftListModel.dispose();
   }
 
   /// Action blocks are added here.
