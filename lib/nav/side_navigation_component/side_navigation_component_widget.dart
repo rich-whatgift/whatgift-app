@@ -138,59 +138,77 @@ class _SideNavigationComponentWidgetState
                     ),
                   ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                      child: Icon(
-                        FFIcons.khome2,
-                        color: FlutterFlowTheme.of(context).white,
-                        size: 22.0,
+                InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.goNamed('Home');
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                        child: Icon(
+                          FFIcons.khome2,
+                          color: FlutterFlowTheme.of(context).white,
+                          size: 22.0,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                      child: Text(
-                        'Home',
-                        style:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: 'Manrope',
-                                  color: FlutterFlowTheme.of(context).white,
-                                  fontWeight: FontWeight.normal,
-                                ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                        child: Text(
+                          'Home',
+                          style:
+                              FlutterFlowTheme.of(context).titleMedium.override(
+                                    fontFamily: 'Manrope',
+                                    color: FlutterFlowTheme.of(context).white,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                      child: Icon(
-                        FFIcons.kprofile2user,
-                        color: FlutterFlowTheme.of(context).white,
-                        size: 22.0,
+                InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    context.pushNamed('Group');
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                        child: Icon(
+                          FFIcons.kprofile2user,
+                          color: FlutterFlowTheme.of(context).white,
+                          size: 22.0,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                      child: Text(
-                        'Groups',
-                        style:
-                            FlutterFlowTheme.of(context).titleMedium.override(
-                                  fontFamily: 'Manrope',
-                                  color: FlutterFlowTheme.of(context).white,
-                                  fontWeight: FontWeight.normal,
-                                ),
+                      Padding(
+                        padding:
+                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                        child: Text(
+                          'Groups',
+                          style:
+                              FlutterFlowTheme.of(context).titleMedium.override(
+                                    fontFamily: 'Manrope',
+                                    color: FlutterFlowTheme.of(context).white,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.max,
@@ -416,60 +434,80 @@ class _SideNavigationComponentWidgetState
                   ),
                 ),
                 if (loggedIn == true)
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                        child: Icon(
-                          FFIcons.kcalendar2,
-                          color: FlutterFlowTheme.of(context).white,
-                          size: 22.0,
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('MyEvent');
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 0.0, 0.0),
+                          child: Icon(
+                            FFIcons.kcalendar2,
+                            color: FlutterFlowTheme.of(context).white,
+                            size: 22.0,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          'Events',
-                          style:
-                              FlutterFlowTheme.of(context).titleMedium.override(
-                                    fontFamily: 'Manrope',
-                                    color: FlutterFlowTheme.of(context).white,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'Events',
+                            style: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  fontFamily: 'Manrope',
+                                  color: FlutterFlowTheme.of(context).white,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 if (loggedIn == true)
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                        child: Icon(
-                          FFIcons.ksetting2,
-                          color: FlutterFlowTheme.of(context).white,
-                          size: 22.0,
+                  InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      context.pushNamed('ProfileSettings');
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 0.0, 0.0),
+                          child: Icon(
+                            FFIcons.ksetting2,
+                            color: FlutterFlowTheme.of(context).white,
+                            size: 22.0,
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
-                        child: Text(
-                          'Setting',
-                          style:
-                              FlutterFlowTheme.of(context).titleMedium.override(
-                                    fontFamily: 'Manrope',
-                                    color: FlutterFlowTheme.of(context).white,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              16.0, 0.0, 0.0, 0.0),
+                          child: Text(
+                            'Setting',
+                            style: FlutterFlowTheme.of(context)
+                                .titleMedium
+                                .override(
+                                  fontFamily: 'Manrope',
+                                  color: FlutterFlowTheme.of(context).white,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
