@@ -17,26 +17,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'gift_guide_paginated_model.dart';
-export 'gift_guide_paginated_model.dart';
+import 'gift_guide_model.dart';
+export 'gift_guide_model.dart';
 
-class GiftGuidePaginatedWidget extends StatefulWidget {
-  const GiftGuidePaginatedWidget({super.key});
+class GiftGuideWidget extends StatefulWidget {
+  const GiftGuideWidget({super.key});
 
   @override
-  State<GiftGuidePaginatedWidget> createState() =>
-      _GiftGuidePaginatedWidgetState();
+  State<GiftGuideWidget> createState() => _GiftGuideWidgetState();
 }
 
-class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
-  late GiftGuidePaginatedModel _model;
+class _GiftGuideWidgetState extends State<GiftGuideWidget> {
+  late GiftGuideModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => GiftGuidePaginatedModel());
+    _model = createModel(context, () => GiftGuideModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
@@ -129,6 +128,7 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                             color: FlutterFlowTheme.of(context).primaryText,
                             fontSize: 16.0,
                             fontWeight: FontWeight.w500,
+                            lineHeight: 1.5,
                           ),
                     ),
                     Container(
@@ -312,113 +312,148 @@ class _GiftGuidePaginatedWidgetState extends State<GiftGuidePaginatedWidget> {
                                   ],
                                 ),
                               ),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    FlutterFlowChoiceChips(
-                                      options: [
-                                        ChipData('All'),
-                                        ChipData('popular'),
-                                        ChipData('technology'),
-                                        ChipData('fashion'),
-                                        ChipData('fitness'),
-                                        ChipData('Toys'),
-                                        ChipData('Food'),
-                                        ChipData('Clothing'),
-                                        ChipData('Beauty & Body')
-                                      ],
-                                      onChanged: (val) async {
-                                        setState(() => _model.choiceChipsValue =
-                                            val?.firstOrNull);
-                                        _model.choiceChipSelectedList =
-                                            await actions.searchTable(
-                                          _model.choiceChipsValue!,
-                                        );
-                                        setState(() {
-                                          _model.textController?.clear();
-                                        });
-                                        setState(() {
-                                          _model.category =
-                                              _model.choiceChipsValue;
-                                          _model.choiceChipResultList =
-                                              _model.choiceChipSelectedList!
-                                                  .where((e) =>
-                                                      getJsonField(
-                                                        e,
-                                                        r'''$.created_by''',
-                                                      ) ==
-                                                      null)
-                                                  .toList()
-                                                  .cast<dynamic>();
-                                        });
-                                        setState(() {
-                                          FFAppState().isFilterOn = false;
-                                          FFAppState().conditions = [];
-                                        });
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 16.0),
+                                child: SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      FutureBuilder<List<CategoryRow>>(
+                                        future: CategoryTable().queryRows(
+                                          queryFn: (q) => q
+                                              .eq(
+                                                'parent_id',
+                                                null,
+                                              )
+                                              .order('name'),
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50.0,
+                                                height: 50.0,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                          Color>(
+                                                    Color(0xFF8431B0),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          List<CategoryRow>
+                                              choiceChipsCategoryRowList =
+                                              snapshot.data!;
+                                          return FlutterFlowChoiceChips(
+                                            options: choiceChipsCategoryRowList
+                                                .map((e) => e.name)
+                                                .withoutNulls
+                                                .toList()
+                                                .map((label) => ChipData(label))
+                                                .toList(),
+                                            onChanged: (val) async {
+                                              setState(() =>
+                                                  _model.choiceChipsValue =
+                                                      val?.firstOrNull);
+                                              _model.categorisedGifts =
+                                                  await actions
+                                                      .giftsQueryOnCategory(
+                                                choiceChipsCategoryRowList
+                                                    .where((e) =>
+                                                        e.name ==
+                                                        _model.choiceChipsValue)
+                                                    .toList()
+                                                    .first
+                                                    .id,
+                                              );
+                                              setState(() {
+                                                _model.textController?.clear();
+                                              });
+                                              setState(() {
+                                                _model.category =
+                                                    _model.choiceChipsValue;
+                                                _model.choiceChipResultList =
+                                                    _model.categorisedGifts!
+                                                        .toList()
+                                                        .cast<dynamic>();
+                                              });
+                                              setState(() {
+                                                FFAppState().isFilterOn = false;
+                                                FFAppState().conditions = [];
+                                              });
 
-                                        setState(() {});
-                                      },
-                                      selectedChipStyle: ChipStyle(
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Manrope',
-                                              color:
+                                              setState(() {});
+                                            },
+                                            selectedChipStyle: ChipStyle(
+                                              backgroundColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .primaryBackground,
+                                                      ),
+                                              iconColor:
                                                   FlutterFlowTheme.of(context)
                                                       .primaryBackground,
+                                              iconSize: 18.0,
+                                              labelPadding:
+                                                  EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          8.0, 4.0, 8.0, 4.0),
+                                              elevation: 1.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(16.0),
                                             ),
-                                        iconColor: FlutterFlowTheme.of(context)
-                                            .primaryBackground,
-                                        iconSize: 18.0,
-                                        labelPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                8.0, 4.0, 8.0, 4.0),
-                                        elevation: 1.0,
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
-                                      ),
-                                      unselectedChipStyle: ChipStyle(
-                                        backgroundColor:
-                                            FlutterFlowTheme.of(context)
-                                                .secondaryBackground,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Manrope',
-                                              color:
+                                            unselectedChipStyle: ChipStyle(
+                                              backgroundColor:
                                                   FlutterFlowTheme.of(context)
-                                                      .primaryText,
-                                              fontSize: 16.0,
+                                                      .transparent,
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Manrope',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .primaryText,
+                                                        fontSize: 16.0,
+                                                      ),
+                                              iconColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryText,
+                                              iconSize: 18.0,
+                                              elevation: 0.0,
+                                              borderRadius:
+                                                  BorderRadius.circular(16.0),
                                             ),
-                                        iconColor: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        iconSize: 18.0,
-                                        labelPadding:
-                                            EdgeInsetsDirectional.fromSTEB(
-                                                4.0, 4.0, 4.0, 4.0),
-                                        elevation: 0.0,
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
+                                            chipSpacing: 8.0,
+                                            rowSpacing: 12.0,
+                                            multiselect: false,
+                                            alignment: WrapAlignment.start,
+                                            controller: _model
+                                                    .choiceChipsValueController ??=
+                                                FormFieldController<
+                                                    List<String>>(
+                                              [],
+                                            ),
+                                            wrapped: false,
+                                          );
+                                        },
                                       ),
-                                      chipSpacing: 8.0,
-                                      rowSpacing: 12.0,
-                                      multiselect: false,
-                                      initialized:
-                                          _model.choiceChipsValue != null,
-                                      alignment: WrapAlignment.start,
-                                      controller:
-                                          _model.choiceChipsValueController ??=
-                                              FormFieldController<List<String>>(
-                                        ['All'],
-                                      ),
-                                      wrapped: false,
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
                               Column(

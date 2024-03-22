@@ -231,6 +231,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'GroupSetting',
           path: '/groupSetting',
           builder: (context, params) => GroupSettingWidget(),
+        ),
+        FFRoute(
+          name: 'GiftGuide',
+          path: '/giftGuide',
+          builder: (context, params) => GiftGuideWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

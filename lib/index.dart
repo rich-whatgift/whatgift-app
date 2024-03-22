@@ -38,3 +38,4 @@ export '/group/purchased_gift/purchased_gift_widget.dart'
 export '/my_event/my_event_widget.dart' show MyEventWidget;
 export '/event_detail/event_detail_widget.dart' show EventDetailWidget;
 export '/group/group_setting/group_setting_widget.dart' show GroupSettingWidget;
+export '/gift/gift_guide/gift_guide_widget.dart' show GiftGuideWidget;

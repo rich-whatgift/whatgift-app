@@ -515,10 +515,6 @@ class _SignupWidgetState extends State<SignupWidget>
                                         onPressed: () async {
                                           setState(() => _model.isToggled =
                                               !_model.isToggled);
-                                          setState(() {
-                                            _model.isToggled =
-                                                !_model.isToggled;
-                                          });
                                         },
                                         value: _model.isToggled,
                                         onIcon: Icon(
@@ -574,100 +570,130 @@ class _SignupWidgetState extends State<SignupWidget>
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 16.0, 0.0, 8.0),
                                     child: FFButtonWidget(
-                                      onPressed: () async {
-                                        Function() _navigate = () {};
-                                        if (_model.isToggled == false) {
-                                          if (_model.enterPasswordController
-                                                  .text ==
-                                              _model.reEnterPasswordController
-                                                  .text) {
-                                            GoRouter.of(context)
-                                                .prepareAuthEvent();
-                                            if (_model.enterPasswordController
-                                                    .text !=
-                                                _model.reEnterPasswordController
-                                                    .text) {
-                                              ScaffoldMessenger.of(context)
-                                                  .showSnackBar(
-                                                SnackBar(
-                                                  content: Text(
-                                                    'Passwords don\'t match!',
-                                                  ),
-                                                ),
-                                              );
-                                              return;
-                                            }
+                                      onPressed: ((_model
+                                                          .enterEmailController.text ==
+                                                      null ||
+                                                  _model.enterEmailController
+                                                          .text ==
+                                                      '') ||
+                                              (_model.enterPasswordController
+                                                          .text ==
+                                                      null ||
+                                                  _model.enterPasswordController
+                                                          .text ==
+                                                      '') ||
+                                              (_model.reEnterPasswordController
+                                                          .text ==
+                                                      null ||
+                                                  _model.reEnterPasswordController
+                                                          .text ==
+                                                      ''))
+                                          ? null
+                                          : () async {
+                                              Function() _navigate = () {};
+                                              if (_model.isToggled == false) {
+                                                if (_model
+                                                        .enterPasswordController
+                                                        .text ==
+                                                    _model
+                                                        .reEnterPasswordController
+                                                        .text) {
+                                                  GoRouter.of(context)
+                                                      .prepareAuthEvent();
+                                                  if (_model
+                                                          .enterPasswordController
+                                                          .text !=
+                                                      _model
+                                                          .reEnterPasswordController
+                                                          .text) {
+                                                    ScaffoldMessenger.of(
+                                                            context)
+                                                        .showSnackBar(
+                                                      SnackBar(
+                                                        content: Text(
+                                                          'Passwords don\'t match!',
+                                                        ),
+                                                      ),
+                                                    );
+                                                    return;
+                                                  }
 
-                                            final user = await authManager
-                                                .createAccountWithEmail(
-                                              context,
-                                              _model.enterEmailController.text,
-                                              _model
-                                                  .enterPasswordController.text,
-                                            );
-                                            if (user == null) {
-                                              return;
-                                            }
+                                                  final user = await authManager
+                                                      .createAccountWithEmail(
+                                                    context,
+                                                    _model.enterEmailController
+                                                        .text,
+                                                    _model
+                                                        .enterPasswordController
+                                                        .text,
+                                                  );
+                                                  if (user == null) {
+                                                    return;
+                                                  }
 
-                                            _navigate = () =>
-                                                context.goNamedAuth(
-                                                    'UserProfile',
-                                                    context.mounted);
-                                            _model.insertNewUserRow =
-                                                await UserTable().insert({
-                                              'created_at':
-                                                  supaSerialize<DateTime>(
-                                                      getCurrentTimestamp),
-                                              'id': currentUserUid,
-                                              'email': _model
-                                                  .enterEmailController.text,
-                                            });
-                                          } else {
-                                            await showDialog(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text(
-                                                      'Passwords not matched'),
-                                                  content: Text(
-                                                      'Please enter the same password!'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext),
-                                                      child: Text('Ok'),
-                                                    ),
-                                                  ],
+                                                  _navigate = () =>
+                                                      context.goNamedAuth(
+                                                          'UserProfile',
+                                                          context.mounted);
+                                                  _model.insertNewUserRow =
+                                                      await UserTable().insert({
+                                                    'created_at': supaSerialize<
+                                                            DateTime>(
+                                                        getCurrentTimestamp),
+                                                    'id': currentUserUid,
+                                                    'email': _model
+                                                        .enterEmailController
+                                                        .text,
+                                                  });
+                                                } else {
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        title: Text(
+                                                            'Passwords not matched'),
+                                                        content: Text(
+                                                            'Please enter the same password!'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext),
+                                                            child: Text('Ok'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                }
+                                              } else {
+                                                await showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (alertDialogContext) {
+                                                    return AlertDialog(
+                                                      title: Text(
+                                                          'Action Required'),
+                                                      content: Text(
+                                                          'Please accept our Terms and Privacy Policy to continue. Exiting if you disagree.'),
+                                                      actions: [
+                                                        TextButton(
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  alertDialogContext),
+                                                          child: Text('Ok'),
+                                                        ),
+                                                      ],
+                                                    );
+                                                  },
                                                 );
-                                              },
-                                            );
-                                          }
-                                        } else {
-                                          await showDialog(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text('Action Required'),
-                                                content: Text(
-                                                    'Please accept our Terms and Privacy Policy to continue. Exiting if you disagree.'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext),
-                                                    child: Text('Ok'),
-                                                  ),
-                                                ],
-                                              );
+                                              }
+
+                                              _navigate();
+
+                                              setState(() {});
                                             },
-                                          );
-                                        }
-
-                                        _navigate();
-
-                                        setState(() {});
-                                      },
                                       text: 'Sign Up',
                                       options: FFButtonOptions(
                                         width:
@@ -696,6 +722,11 @@ class _SignupWidgetState extends State<SignupWidget>
                                         ),
                                         borderRadius:
                                             BorderRadius.circular(24.0),
+                                        disabledColor:
+                                            FlutterFlowTheme.of(context)
+                                                .accent4,
+                                        disabledTextColor:
+                                            FlutterFlowTheme.of(context).info,
                                       ),
                                     ),
                                   ),
